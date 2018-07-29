@@ -3,6 +3,7 @@
 
 
 
+
 class ServoService{
   
   // Singelton design pattern - this instance can exist only once!
@@ -16,6 +17,7 @@ class ServoService{
   protected:
      ServoService();
      static ServoService* instance;
+     
 
      
 };

@@ -15,12 +15,11 @@
 // This is the BLE-Gatt-Serviceadress under which all characteristics are
 #define ble_serviceaddress "0x4d41"
 
-// Definitions to get the number of servos
-
-
 // Definitions to set servo values
 #define gatt_uid_setservo "0x1010"
 
+// How many servos do we have?
+#define nr_of_servos 2
 
 
 #endif

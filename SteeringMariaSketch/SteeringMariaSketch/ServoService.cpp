@@ -1,11 +1,16 @@
 #include <Arduino.h>
 #include "ServoService.h"
+
 #include "config.h"
+#include "Servo.h"
+
+
+
+Servo servos[nr_of_servos];
 
 
 
 ServoService * ServoService::instance = 0;
-
 ServoService * ServoService::getInstance()
 {
     if (instance == 0)
@@ -20,7 +25,10 @@ ServoService * ServoService::getInstance()
 
 // The constructor; it is protected since we have a singleton 
 ServoService::ServoService(){
-  //Serial.println(F("Constructor SMBlue"));
+  Servo::init();
+  for (int i=0; i < nr_of_servos; i++){
+    servos[i].init(i);
+  }
 }
 
 
@@ -36,8 +44,5 @@ void ServoService::update(){
 }
 
 bool ServoService::setServo( uint8_t nr, uint16_t pos){
-  Serial.println(F("Setting servo nr. "));
-  Serial.println(nr);
-  Serial.println(F(" to position "));
-  Serial.println(pos);  
+  
 }
