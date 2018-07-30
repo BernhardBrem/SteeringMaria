@@ -22,7 +22,7 @@
   "_resolved": "https://registry.npmjs.org/cordova-plugin-ble-central/-/cordova-plugin-ble-central-1.2.2.tgz",
   "_shasum": "22f4ed72c2fb0b7ef0e7eb983a419e7aaf07eb21",
   "_spec": "cordova-plugin-ble-central",
-  "_where": "/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp",
+  "_where": "/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp",
   "author": {
     "name": "Don Coleman",
     "email": "don.coleman@gmail.com"

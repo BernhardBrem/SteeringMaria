@@ -110,7 +110,7 @@ var TabsPage = /** @class */ (function () {
         this.tabLogsRoot = __WEBPACK_IMPORTED_MODULE_3__logs_logs_component__["a" /* LogsComponent */];
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/pages/tabs/tabs.html"*/'<ion-tabs>\n  <ion-tab [root]="tabDeviceRoot" tabTitle="Device" tabIcon="bluetooth"></ion-tab>\n  <ion-tab [root]="tabServosRoot" tabTitle="Servos" tabIcon="cog"></ion-tab>\n  <ion-tab [root]="tabLogsRoot" tabTitle="Logs" tabIcon="contacts"></ion-tab>\n</ion-tabs>\n\n'/*ion-inline-end:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/pages/tabs/tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/tabs/tabs.html"*/'<ion-tabs>\n  <ion-tab [root]="tabDeviceRoot" tabTitle="Device" tabIcon="bluetooth"></ion-tab>\n  <ion-tab [root]="tabServosRoot" tabTitle="Servos" tabIcon="cog"></ion-tab>\n  <ion-tab [root]="tabLogsRoot" tabTitle="Logs" tabIcon="contacts"></ion-tab>\n</ion-tabs>\n\n'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/tabs/tabs.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], TabsPage);
@@ -198,7 +198,7 @@ var DeviceComponent = /** @class */ (function () {
     };
     DeviceComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-device',template:/*ion-inline-start:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/pages/device/device.component.html"*/'\n<ion-content>\n    <h2>Device</h2>\n    <ion-list>\n        <ion-item>Name: {{ bleDeviceService.device.name }}</ion-item>\n        <ion-item>ID: {{ bleDeviceService.device.id }}</ion-item>\n        <ion-item>Connected: {{ bleDeviceService.device.connected }}</ion-item>\n    </ion-list> \n     <button ion-button (click)="scan()">\n        Scan\n      </button>\n   <ion-list> \n    <button ion-item *ngFor="let device of devices" (click)=deviceSelected(device) >\n      <h2>{{ device.name || \'Unnamed\' }}</h2>\n      <p>{{ device.id }}</p>\n      <p>RSSI: {{ device.rssi }}</p>\n    </button>  \n   </ion-list> \n   </ion-content>'/*ion-inline-end:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/pages/device/device.component.html"*/
+            selector: 'page-device',template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/device/device.component.html"*/'\n<ion-content>\n    <h2>Device</h2>\n    <ion-list>\n        <ion-item>Name: {{ bleDeviceService.device.name }}</ion-item>\n        <ion-item>ID: {{ bleDeviceService.device.id }}</ion-item>\n        <ion-item>Connected: {{ bleDeviceService.device.connected }}</ion-item>\n    </ion-list> \n     <button ion-button (click)="scan()">\n        Scan\n      </button>\n   <ion-list> \n    <button ion-item *ngFor="let device of devices" (click)=deviceSelected(device) >\n      <h2>{{ device.name || \'Unnamed\' }}</h2>\n      <p>{{ device.id }}</p>\n      <p>RSSI: {{ device.rssi }}</p>\n    </button>  \n   </ion-list> \n   </ion-content>'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/device/device.component.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */],
@@ -249,7 +249,7 @@ var ServosComponent = /** @class */ (function () {
     };
     ServosComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-servos',template:/*ion-inline-start:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/pages/servos/servos.component.html"*/'<ion-content>\n    <h2>Servos</h2>\n    <ion-list>\n        <ion-item *ngFor="let servo of servoService.servos">\n\n            <ion-range min="0" max="4095"  [(ngModel)]=servo.pos (ionChange)=servo.sendPos($event)  >\n                <ion-label range-left>{{servo.id}}: {{servo.pos}}</ion-label>\n            </ion-range>\n\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/pages/servos/servos.component.html"*/,
+            selector: 'page-servos',template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servos/servos.component.html"*/'<ion-content>\n    <h2>Servos</h2>\n    <ion-list>\n        <ion-item *ngFor="let servo of servoService.servos">\n\n            <ion-range min="0" max="4095"  [(ngModel)]=servo.pos (ionChange)=servo.sendPos($event)  >\n                <ion-label range-left>{{servo.id}}: {{servo.pos}}</ion-label>\n            </ion-range>\n\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servos/servos.component.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1__services_log_log_service__["a" /* LogService */], __WEBPACK_IMPORTED_MODULE_2__services_servos_servos_service__["a" /* ServoService */]])
     ], ServosComponent);
@@ -369,7 +369,7 @@ var LogsComponent = /** @class */ (function () {
     };
     LogsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-logs',template:/*ion-inline-start:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/pages/logs/logs.component.html"*/'<div *ngIf="logService.logs.length">\n\n    <h2>Log</h2>\n    <button ion-button\n            (click)="logService.clear()">clear\n    </button>\n    <ion-list>\n        <ion-item *ngFor=\'let logentry of logService.logs\'> \n            <ion-label>{{logentry.date | date: \'short\' }}</ion-label>\n            <ion-label> {{logentry.message}}</ion-label>\n        </ion-item>\n    </ion-list>\n</div>'/*ion-inline-end:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/pages/logs/logs.component.html"*/,
+            selector: 'page-logs',template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/logs/logs.component.html"*/'<div *ngIf="logService.logs.length">\n\n    <h2>Log</h2>\n    <button ion-button\n            (click)="logService.clear()">clear\n    </button>\n    <ion-list>\n        <ion-item *ngFor=\'let logentry of logService.logs\'> \n            <ion-label>{{logentry.date | date: \'short\' }}</ion-label>\n            <ion-label> {{logentry.message}}</ion-label>\n        </ion-item>\n    </ion-list>\n</div>'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/logs/logs.component.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1__services_log_log_service__["a" /* LogService */]])
     ], LogsComponent);
@@ -515,7 +515,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);

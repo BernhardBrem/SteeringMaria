@@ -1,28 +1,28 @@
 {
-  "_from": "cordova-plugin-ionic-keyboard@2.0.5",
-  "_id": "cordova-plugin-ionic-keyboard@2.0.5",
+  "_from": "cordova-plugin-ionic-keyboard@^2.0.5",
+  "_id": "cordova-plugin-ionic-keyboard@2.1.2",
   "_inBundle": false,
-  "_integrity": "sha512-ygwK+U7Vs7OJJYsDrWAxhegHfvuRRpMC3Y8RhQSVLfv4ELrXtkCUjD+UfsDQ3aObpvxGLTvcVrOw5p04dPXy3w==",
+  "_integrity": "sha512-uJeL83WMMD15Y+aISznwQfm+ZwSHkPvVZSI7cjDZX/6umn2Rz1BiR9W0MSiooSUv5DF3U8QdJjDSDY5cwigbVA==",
   "_location": "/cordova-plugin-ionic-keyboard",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-ionic-keyboard@2.0.5",
+    "raw": "cordova-plugin-ionic-keyboard@^2.0.5",
     "name": "cordova-plugin-ionic-keyboard",
     "escapedName": "cordova-plugin-ionic-keyboard",
-    "rawSpec": "2.0.5",
+    "rawSpec": "^2.0.5",
     "saveSpec": null,
-    "fetchSpec": "2.0.5"
+    "fetchSpec": "^2.0.5"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-ionic-keyboard/-/cordova-plugin-ionic-keyboard-2.0.5.tgz",
-  "_shasum": "c7c35ffd8f6a1ef77e27a1eee70ccaa2e94f99e1",
-  "_spec": "cordova-plugin-ionic-keyboard@2.0.5",
-  "_where": "/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-ionic-keyboard/-/cordova-plugin-ionic-keyboard-2.1.2.tgz",
+  "_shasum": "6d91bac2b5aba578dcccfd63e61b0960c33f9e4a",
+  "_spec": "cordova-plugin-ionic-keyboard@^2.0.5",
+  "_where": "/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp",
   "author": {
     "name": "Apache Software Foundation"
   },
@@ -55,5 +55,5 @@
     "sync_plugin_xml": "sync-cordova-xml package.json plugin.xml --output=plugin.xml",
     "version": "npm run sync_plugin_xml && git add plugin.xml"
   },
-  "version": "2.0.5"
+  "version": "2.1.2"
 }

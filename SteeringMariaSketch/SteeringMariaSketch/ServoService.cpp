@@ -25,16 +25,18 @@ ServoService * ServoService::getInstance()
 
 // The constructor; it is protected since we have a singleton 
 ServoService::ServoService(){
-  Servo::init();
-  for (int i=0; i < nr_of_servos; i++){
-    servos[i].init(i);
-  }
 }
 
 
 
 bool ServoService::init(){
   Serial.println(F("Init servos!"));
+   Servo::init();
+  for (uint8_t i=0; i < nr_of_servos; i++){
+    //Serial.println(F("Init servo") );
+    //Serial.println(i);
+    servos[i].init(i);
+  }
   
 }
 
@@ -44,5 +46,7 @@ void ServoService::update(){
 }
 
 bool ServoService::setServo( uint8_t nr, uint16_t pos){
+  //Serial.println(nr);
+  servos[nr].setServo(pos);
   
 }

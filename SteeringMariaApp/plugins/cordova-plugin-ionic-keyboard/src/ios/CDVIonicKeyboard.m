@@ -55,6 +55,8 @@ typedef enum : NSUInteger {
 {
     NSDictionary *settings = self.commandDelegate.settings;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarDidChangeFrame:) name: UIApplicationDidChangeStatusBarFrameNotification object:nil];
+
     self.keyboardResizes = ResizeNative;
     BOOL doesResize = [settings cordovaBoolSettingForKey:@"KeyboardResize" defaultValue:YES];
     if (!doesResize) {
@@ -93,6 +95,11 @@ typedef enum : NSUInteger {
         [nc removeObserver:self.webView name:UIKeyboardWillChangeFrameNotification object:nil];
         [nc removeObserver:self.webView name:UIKeyboardDidChangeFrameNotification object:nil];
     }
+}
+
+-(void)statusBarDidChangeFrame:(NSNotification*)notification
+{
+    [self _updateFrame];
 }
 
 
@@ -174,26 +181,35 @@ typedef enum : NSUInteger {
 
 - (void)_updateFrame
 {
+    CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
+    int statusBarHeight = MIN(statusBarSize.width, statusBarSize.height);
+    
+    int _paddingBottom = (int)self.paddingBottom;
+        
+    if (statusBarHeight == 40) {
+        _paddingBottom = _paddingBottom + 20;
+    }
     NSLog(@"CDVIonicKeyboard: updating frame");
     CGRect f = [[UIScreen mainScreen] bounds];
+    CGRect wf = self.webView.frame;
     switch (self.keyboardResizes) {
         case ResizeBody:
         {
             NSString *js = [NSString stringWithFormat:@"Keyboard.fireOnResize(%d, %d, document.body);",
-                            (int)self.paddingBottom, (int)f.size.height];
+                            _paddingBottom, (int)f.size.height];
             [self.commandDelegate evalJs:js];
             break;
         }
         case ResizeIonic:
         {
             NSString *js = [NSString stringWithFormat:@"Keyboard.fireOnResize(%d, %d, document.querySelector('ion-app'));",
-                            (int)self.paddingBottom, (int)f.size.height];
+                            _paddingBottom, (int)f.size.height];
             [self.commandDelegate evalJs:js];
             break;
         }
         case ResizeNative:
         {
-            [self.webView setFrame:CGRectMake(f.origin.x, f.origin.y, f.size.width, f.size.height - self.paddingBottom)];
+            [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - self.paddingBottom)];
             break;
         }
         default:

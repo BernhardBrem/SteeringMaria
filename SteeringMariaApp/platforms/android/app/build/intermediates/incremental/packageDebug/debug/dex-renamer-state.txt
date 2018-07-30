@@ -1,4 +1,4 @@
-#Sat Jul 28 23:55:47 CEST 2018
-base.0=/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+#Mon Jul 30 22:38:05 CEST 2018
+base.0=/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
 renamed.0=classes.dex
-file.0=/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex
+file.0=/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex

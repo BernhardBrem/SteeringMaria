@@ -1,28 +1,28 @@
 {
-  "_from": "cordova-plugin-ionic-webview@1.1.19",
-  "_id": "cordova-plugin-ionic-webview@1.1.19",
+  "_from": "cordova-plugin-ionic-webview@^2.0.0",
+  "_id": "cordova-plugin-ionic-webview@2.0.1",
   "_inBundle": false,
-  "_integrity": "sha512-Sgs6eHWsVFYBuc2xVhA3JqV7d7Wac6Yj1ZJjBLrhaA60LlMV8pReaPvWr898DKoLfhlBhJqNBEJSUAVP/4G9FA==",
+  "_integrity": "sha512-KlHXqII1x+wZjwJKwB9Eomc4VhZXALFUSBD99V6U8J0DA8uHwxcgINfMe7sbAzgWVhrwV4Ow3RmODvohw3woGg==",
   "_location": "/cordova-plugin-ionic-webview",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-ionic-webview@1.1.19",
+    "raw": "cordova-plugin-ionic-webview@^2.0.0",
     "name": "cordova-plugin-ionic-webview",
     "escapedName": "cordova-plugin-ionic-webview",
-    "rawSpec": "1.1.19",
+    "rawSpec": "^2.0.0",
     "saveSpec": null,
-    "fetchSpec": "1.1.19"
+    "fetchSpec": "^2.0.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-1.1.19.tgz",
-  "_shasum": "7f18d30291153c4066f529399a8d8226aa4fb28e",
-  "_spec": "cordova-plugin-ionic-webview@1.1.19",
-  "_where": "/home/bb/Dropbox/src/Sevos_Maria/SteeringMaria/SteeringMariaApp/SteeringMariaApp",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-2.0.1.tgz",
+  "_shasum": "b572fc813b9d1305b5fd98f4efdd7776245d78fa",
+  "_spec": "cordova-plugin-ionic-webview@^2.0.0",
+  "_where": "/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp",
   "author": {
     "name": "Ionic Team"
   },
@@ -33,8 +33,16 @@
   "deprecated": false,
   "description": "The official Ionic's WKWebView Engine Plugin",
   "devDependencies": {
-    "np": "^2.16.0",
+    "np": "^3.0.4",
     "sync-cordova-xml": "^0.4.0"
+  },
+  "engines": {
+    "cordovaDependencies": {
+      "2.0.0": {
+        "cordova-android": ">=6.4.0",
+        "cordova-ios": ">=4.0.0-dev"
+      }
+    }
   },
   "homepage": "https://github.com/ionic-team/cordova-plugin-ionic-webview#readme",
   "keywords": [
@@ -53,5 +61,5 @@
     "sync_plugin_xml": "sync-cordova-xml package.json plugin.xml --output=plugin.xml",
     "version": "npm run sync_plugin_xml && git add plugin.xml"
   },
-  "version": "1.1.19"
+  "version": "2.0.1"
 }
