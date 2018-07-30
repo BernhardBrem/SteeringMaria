@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="link.path"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{link.label}}
+  </a>
+</nav>
+<router-outlet></router-outlet>
+<!--nav mat-tab-nav-bar>
+    <a mat-tab-link [routerLink]="/device">Devices</a>
+    <a mat-tab-link [routerLink]="/logs">Logs</a>
+  <!--a routerLink="/device">Devices</a>
+  <a routerLink="/logs">Logs</a-->
+<!--/nav-->
+<!--router-outlet></router-outlet-->
+<!--app-logs></app-logs-->

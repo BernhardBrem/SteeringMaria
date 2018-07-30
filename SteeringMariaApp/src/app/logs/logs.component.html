@@ -1,0 +1,15 @@
+<div *ngIf="logService.logs.length">
+
+    <h2>Log</h2>
+    <button class="clear"
+            (click)="logService.clear()">clear
+    </button>
+    <table>
+        <thead>
+            <tr>
+                <td> Date</td><td> message</td>
+            </tr>
+        </thead>
+        <tr *ngFor='let logentry of logService.logs'> <td>{{logentry.date | date: 'short' }}</td><td> {{logentry.message}}</td></tr>
+    </table>
+</div>
