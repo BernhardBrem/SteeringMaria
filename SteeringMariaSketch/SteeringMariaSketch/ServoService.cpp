@@ -6,7 +6,7 @@
 
 
 
-Servo servos[nr_of_servos];
+Servo servos[NR_OF_SERVOS];
 
 
 
@@ -32,7 +32,7 @@ ServoService::ServoService(){
 bool ServoService::init(){
   Serial.println(F("Init servos!"));
    Servo::init();
-  for (uint8_t i=0; i < nr_of_servos; i++){
+  for (uint8_t i=0; i < NR_OF_SERVOS; i++){
     //Serial.println(F("Init servo") );
     //Serial.println(i);
     servos[i].init(i);
@@ -50,3 +50,49 @@ bool ServoService::setServo( uint8_t nr, uint16_t pos){
   servos[nr].setServo(pos);
   
 }
+
+
+uint16_t ServoService::getServo( uint8_t nr){
+  //Serial.println(nr);
+  return servos[nr].getServo();
+  
+}
+
+bool ServoService::setLeftLimit( uint8_t nr, uint16_t pos){
+  //Serial.println(nr);
+  servos[nr].setLeftLimit(pos);  
+}
+
+bool ServoService::setRightLimit( uint8_t nr, uint16_t pos){
+  //Serial.println(nr);
+  servos[nr].setRightLimit(pos);  
+}
+
+bool ServoService::setZero( uint8_t nr, uint16_t pos){
+  //Serial.println(nr);
+  servos[nr].setZero(pos);  
+}
+
+uint16_t ServoService::getLeftLimit(uint8_t nr){
+  //Serial.println(nr);
+  return servos[nr].getLeftLimit();  
+}
+
+uint16_t ServoService::getRightLimit(uint8_t nr){
+  //Serial.println(nr);
+  return servos[nr].getRightLimit();  
+}
+
+uint16_t ServoService::getZero(uint8_t nr){
+  //Serial.println(nr);
+  return servos[nr].getZero();  
+}
+
+
+
+
+
+
+
+
+

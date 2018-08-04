@@ -323,7 +323,7 @@ These constants need to have exactly the same vals as the constants in the sketc
 var ServoConstants = /** @class */ (function () {
     function ServoConstants() {
     }
-    ServoConstants.NumberOfServos = 2;
+    ServoConstants.NumberOfServos = 16;
     ServoConstants.servoService = '4d41';
     ServoConstants.setServoCharacteristic = '1010';
     ServoConstants = __decorate([

@@ -9,11 +9,20 @@ class Servo{
     void init(uint8_t tid);
     void setServo(uint16_t pos );
     uint16_t getServo();
+    bool setLeftLimit( uint16_t pos);
+    bool setRightLimit(uint16_t pos);
+    bool setZero( uint16_t pos);
+    uint16_t getLeftLimit();
+    uint16_t getRightLimit();
+    uint16_t getZero();
     
   protected:
     uint8_t id;
     uint16_t pos;
-
+    uint16_t leftLimit;
+    uint16_t rightLimit;
+    uint16_t zero;
+    int eprom_start;
 };
 
 #endif
