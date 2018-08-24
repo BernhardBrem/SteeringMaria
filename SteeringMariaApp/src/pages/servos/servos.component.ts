@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogService } from '../../services/log/log.service';
 import { ServoService } from '../../services/servos/servos.service';
+import { Servo } from '../../services/servos/servo';
 import { NavController } from 'ionic-angular';
 
 @Component({
@@ -17,5 +18,10 @@ export class ServosComponent implements OnInit {
   ngOnInit() {
       this.logService.add("Calling Servos!");
   }
+
+  servoDetails(servo: Servo) {
+      console.log(JSON.stringify(servo.id) + ' selected');
+      //this.bleDeviceService.setDevice(device);
+    }
 
 }

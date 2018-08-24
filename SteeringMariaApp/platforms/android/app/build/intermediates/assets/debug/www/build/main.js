@@ -247,9 +247,13 @@ var ServosComponent = /** @class */ (function () {
     ServosComponent.prototype.ngOnInit = function () {
         this.logService.add("Calling Servos!");
     };
+    ServosComponent.prototype.servoDetails = function (servo) {
+        console.log(JSON.stringify(servo.id) + ' selected');
+        //this.bleDeviceService.setDevice(device);
+    };
     ServosComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-servos',template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servos/servos.component.html"*/'<ion-content>\n    <h2>Servos</h2>\n    <ion-list>\n        <ion-item *ngFor="let servo of servoService.servos">\n\n            <ion-range min="0" max="4095"  [(ngModel)]=servo.pos (ionChange)=servo.sendPos($event)  >\n                <ion-label range-left>{{servo.id}}: {{servo.pos}}</ion-label>\n            </ion-range>\n\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servos/servos.component.html"*/,
+            selector: 'page-servos',template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servos/servos.component.html"*/'<ion-content>\n    <h2>Servos</h2>\n    <ion-list>\n        <ion-item *ngFor="let servo of servoService.servos">\n            Bla\n            <button ion-button (click)=servoDetails(servo)>SET</button>\n            <ion-range min="0" max="4095"  [(ngModel)]=servo.pos (ionChange)=servo.sendPos($event)  >\n            <ion-label range-left  (click)=servoDetails(servo)>  <ion-icon item-right name="create" ></ion-icon>{{servo.id}} {{servo.pos}}</ion-label>                \n            </ion-range>\n\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servos/servos.component.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1__services_log_log_service__["a" /* LogService */], __WEBPACK_IMPORTED_MODULE_2__services_servos_servos_service__["a" /* ServoService */]])
     ], ServosComponent);

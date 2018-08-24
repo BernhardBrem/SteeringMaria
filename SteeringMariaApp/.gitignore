@@ -29,7 +29,7 @@ plugins/android.json
 plugins/ios.json
 www/
 $RECYCLE.BIN/
-
+platforms/android/.gradle/4.1/fileHashes/*
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
