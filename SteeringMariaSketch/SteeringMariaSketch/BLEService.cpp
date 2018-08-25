@@ -42,7 +42,7 @@
 #define GATTADDSERVICE "AT+GATTADDSERVICE=uuid=" BLE_SERVICEADDRESS
 #define GATT_SERVO_PRE "AT+GATTADDCHAR=UUID="
 #define GATT_SERVO_POST ",PROPERTIES=0x08,MIN_LEN=3,MAX_LEN=3,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"
-#define GATT_SERVO_SET  GATT_SERVO_PRE GATT_UID_SETSERVO GATT_SERVO_POST
+#define GATT_SERVO_SETPOS  GATT_SERVO_PRE GATT_UID_SETSERVOPOS GATT_SERVO_POST
 
 
 
@@ -196,7 +196,7 @@ bool BLEService::init(){
   ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0x2001,PROPERTIES=0x08,MIN_LEN=4,MAX_LEN=4,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"), &charid_number);
   // Set servo position direct:
   // One byte to adress the servo, 2 bytes for the value
-  ble.sendCommandWithIntReply( F(GATT_SERVO_SET), &charid_servos_set_direct);
+  ble.sendCommandWithIntReply( F(GATT_SERVO_SETPOS), &charid_servos_set_direct);
   
   ble.reset();
 

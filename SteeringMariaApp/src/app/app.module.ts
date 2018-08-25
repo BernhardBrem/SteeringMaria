@@ -8,6 +8,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import {LogsComponent} from '../pages/logs/logs.component';
 import {DeviceComponent} from '../pages/device/device.component';
 import {ServosComponent} from '../pages/servos/servos.component';
+import {ServoSettingsComponent} from '../pages/servoSettings/servoSettings.component';
+
 
 import {LogService} from '../services/log/log.service';
 import {BleDeviceService} from '../services/bledevice/bledevice.service';
@@ -27,7 +29,8 @@ import { BLE } from '@ionic-native/ble';
     TabsPage,
     DeviceComponent,
     ServosComponent,
-    LogsComponent,
+    ServoSettingsComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import { BLE } from '@ionic-native/ble';
     DeviceComponent,
     ServosComponent,
     LogsComponent,
+    ServoSettingsComponent
     
   ],
   providers: [

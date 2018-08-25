@@ -1,0 +1,19 @@
+<ion-content>  
+    <h2>Servo {{servoService.currentServo.id}}</h2>
+    <ion-list>
+        <ion-item>
+            <ion-range min="0" max="4095" [(ngModel)]=servoService.currentServo.pos (ionChange)=servoService.currentServo.sendPos($event)>
+                <ion-label range-left >
+                    Current pos: 
+                </ion-label>
+            </ion-range>
+            <ion-range min="0" max="4095" [(ngModel)]=servoService.currentServo.zero (ionChange)=servoService.currentServo.sendZero($event)>
+                <ion-label range-left >
+                    Zero: 
+                </ion-label>
+            </ion-range>
+             
+            
+        </ion-item>
+    </ion-list>
+</ion-content>

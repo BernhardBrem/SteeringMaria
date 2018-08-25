@@ -3,6 +3,9 @@ import { LogService } from '../../services/log/log.service';
 import { ServoService } from '../../services/servos/servos.service';
 import { Servo } from '../../services/servos/servo';
 import { NavController } from 'ionic-angular';
+import {ServoSettingsComponent} from '../servoSettings/servoSettings.component';
+
+
 
 @Component({
   selector: 'page-servos',
@@ -21,7 +24,10 @@ export class ServosComponent implements OnInit {
 
   servoDetails(servo: Servo) {
       console.log(JSON.stringify(servo.id) + ' selected');
+      this.servoService.currentServo=servo;
       //this.bleDeviceService.setDevice(device);
+      this.navCtrl.push(ServoSettingsComponent)
+
     }
 
 }
