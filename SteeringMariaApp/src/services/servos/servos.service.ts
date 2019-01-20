@@ -15,7 +15,7 @@ export class ServoService {
     servos: Servo[] = [];
 
     constructor(ble: BleServoCommunicatorService, log: LogService) {
-        for (let i = 0; i < ServoConstants.NumberOfServos; i++) {
+        for (let i = 0; i < ServoConstants.NR_OF_SERVOS; i++) {
             this.servos.push(new Servo(i, ble, log));
         }
 

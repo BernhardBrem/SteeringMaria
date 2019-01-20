@@ -31,7 +31,7 @@ ServoService::ServoService(){
 
 bool ServoService::init(){
   Serial.println(F("Init servos!"));
-   Servo::init();
+  Servo::init();
   for (uint8_t i=0; i < NR_OF_SERVOS; i++){
     //Serial.println(F("Init servo") );
     //Serial.println(i);
@@ -45,16 +45,16 @@ void ServoService::update(){
  
 }
 
-bool ServoService::setServo( uint8_t nr, uint16_t pos){
+bool ServoService::setPos( uint8_t nr, uint16_t pos){
   //Serial.println(nr);
-  servos[nr].setServo(pos);
+  servos[nr].setPos(pos);
   
 }
 
 
-uint16_t ServoService::getServo( uint8_t nr){
+uint16_t ServoService::getPos( uint8_t nr){
   //Serial.println(nr);
-  return servos[nr].getServo();
+  return servos[nr].getPos();
   
 }
 
@@ -87,12 +87,3 @@ uint16_t ServoService::getZero(uint8_t nr){
   //Serial.println(nr);
   return servos[nr].getZero();  
 }
-
-
-
-
-
-
-
-
-

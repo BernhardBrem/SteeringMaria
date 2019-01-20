@@ -8,15 +8,24 @@
                 "${workspaceFolder}/**",
                 "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/tools/avr/avr/include",
                 "/home/bb/Dropbox/programme/arduino-1.8.4/libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/BOARDS/ARDUINO/",
-                "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/arduino/avr/variants/mega"
+                "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/arduino/avr/variants/mega",
+                "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/arduino/avr/variants/mega/pins_arduino.h",
+                "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/arduino/avr/cores/arduino/Arduino.h",
+                "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/arduino/avr/cores/arduino/HardwareSerial.h"
+               
             ],
-            "defines": [],
+            "defines": [
+                "ARDUINO=200"
+            ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64",
             "forcedInclude": [
-                "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/arduino/avr/cores/arduino/Arduino.h"
+                "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/arduino/avr/cores/arduino/Arduino.h",
+                "/home/bb/Dropbox/programme/arduino-1.8.4/hardware/arduino/avr/cores/arduino/HardwareSerial.h"
+               
+                
             ]
         }
     ],

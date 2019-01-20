@@ -7,8 +7,8 @@ class Servo{
     Servo();
     static void init();
     void init(uint8_t tid);
-    void setServo(uint16_t pos );
-    uint16_t getServo();
+    void setPos(uint16_t pos );
+    uint16_t getPos();
     bool setLeftLimit( uint16_t pos);
     bool setRightLimit(uint16_t pos);
     bool setZero( uint16_t pos);

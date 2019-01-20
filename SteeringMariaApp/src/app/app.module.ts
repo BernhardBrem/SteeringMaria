@@ -13,6 +13,7 @@ import {ServoSettingsComponent} from '../pages/servoSettings/servoSettings.compo
 
 import {LogService} from '../services/log/log.service';
 import {BleDeviceService} from '../services/bledevice/bledevice.service';
+import {BleServoCommunicatorService } from '../services/bledevice/bleServoCommunicator.service';
 import {ServoService} from '../services/servos/servos.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -51,6 +52,7 @@ import { BLE } from '@ionic-native/ble';
     SplashScreen,
     LogService,
     BleDeviceService,
+    BleServoCommunicatorService, 
     ServoService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BLE

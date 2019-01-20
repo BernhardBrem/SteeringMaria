@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 102:
+/***/ 103:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BleDeviceService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_ble__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_ble__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bledevice__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_log_log_service__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bledevice__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_log_log_service__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47,16 +47,16 @@ var BleDeviceService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 103:
+/***/ 104:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServoService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__servo__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__servoConstants__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_log_log_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_bledevice_bledevice_service__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__servo__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__servoConstants__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_log_log_service__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_bledevice_bleServoCommunicator_service__ = __webpack_require__(201);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -74,13 +74,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ServoService = /** @class */ (function () {
     function ServoService(ble, log) {
         this.servos = [];
-        for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_2__servoConstants__["a" /* ServoConstants */].NumberOfServos; i++) {
+        for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_2__servoConstants__["a" /* ServoConstants */].NR_OF_SERVOS; i++) {
             this.servos.push(new __WEBPACK_IMPORTED_MODULE_1__servo__["a" /* Servo */](i, ble, log));
         }
     }
     ServoService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__services_bledevice_bledevice_service__["a" /* BleDeviceService */], __WEBPACK_IMPORTED_MODULE_3__services_log_log_service__["a" /* LogService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__services_bledevice_bleServoCommunicator_service__["a" /* BleServoCommunicatorService */], __WEBPACK_IMPORTED_MODULE_3__services_log_log_service__["a" /* LogService */]])
     ], ServoService);
     return ServoService;
 }());
@@ -89,7 +89,7 @@ var ServoService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 113:
+/***/ 114:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -102,11 +102,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 113;
+webpackEmptyAsyncContext.id = 114;
 
 /***/ }),
 
-/***/ 154:
+/***/ 155:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -119,19 +119,19 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 154;
+webpackEmptyAsyncContext.id = 155;
 
 /***/ }),
 
-/***/ 197:
+/***/ 198:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__device_device_component__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__servos_servos_component__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logs_logs_component__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__device_device_component__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__servos_servos_component__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logs_logs_component__ = __webpack_require__(203);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -163,16 +163,16 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 198:
+/***/ 199:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_log_log_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_bledevice_bledevice_service__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_log_log_service__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_bledevice_bledevice_service__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -256,16 +256,16 @@ var DeviceComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 199:
+/***/ 200:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServosComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_log_log_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_servos_servos_service__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__servoSettings_servoSettings_component__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_log_log_service__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_servos_servos_service__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__servoSettings_servoSettings_component__ = __webpack_require__(202);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -310,47 +310,80 @@ var ServosComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 200:
+/***/ 201:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServoConstants; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BleServoCommunicatorService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bledevice_service__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__log_log_service__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
-/*
-These constants need to have exactly the same vals as the constants in the sketch!
- */
-var ServoConstants = /** @class */ (function () {
-    function ServoConstants() {
+
+
+
+var BleServoCommunicatorService = /** @class */ (function () {
+    function BleServoCommunicatorService(ble, log) {
     }
-    ServoConstants.NumberOfServos = 16;
-    ServoConstants.servoService = '4d41';
-    ServoConstants.setServoCharacteristic = '1010';
-    ServoConstants = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
-    ], ServoConstants);
-    return ServoConstants;
+    // Pack the number to send and the own id in a common array buffer
+    BleServoCommunicatorService.prototype.toArrayBuffer = function (servoId, para) {
+        var tempBuffer = new ArrayBuffer(2);
+        var fView1 = new Uint16Array(tempBuffer);
+        fView1[0] = para;
+        var fview2 = new Uint8Array(tempBuffer);
+        var result = new ArrayBuffer(3);
+        var fview3 = new Uint8Array(result);
+        fview3[0] = servoId;
+        fview3[1] = fview2[0];
+        fview3[2] = fview2[1];
+        return result;
+    };
+    BleServoCommunicatorService.prototype.sendPosLike = function (servo, posConstant) {
+        var buffer = this.toArrayBuffer(servo.id, servo.pos);
+        this.ble.device.sendCharacteristic(__WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].BLE_SERVICEADDRESS, posConstant, buffer);
+    };
+    BleServoCommunicatorService.prototype.sendPos = function (servo) {
+        this.sendPosLike(servo, __WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_SETSERVOPOS);
+    };
+    BleServoCommunicatorService.prototype.sendZero = function (servo) {
+        this.sendPosLike(servo, __WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_SETSERVOZERO);
+    };
+    BleServoCommunicatorService.prototype.updateServoZero = function (servo, count) {
+        servo.zero = count;
+    };
+    BleServoCommunicatorService.prototype.requestZero = function (servo) {
+        this.ble.device.getBufferFromDevice(__WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].BLE_SERVICEADDRESS, __WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_GETSERVOZERO, servo, this.updateServoZero);
+    };
+    BleServoCommunicatorService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__bledevice_service__["a" /* BleDeviceService */], __WEBPACK_IMPORTED_MODULE_2__log_log_service__["a" /* LogService */]])
+    ], BleServoCommunicatorService);
+    return BleServoCommunicatorService;
 }());
 
-//# sourceMappingURL=servoConstants.js.map
+//# sourceMappingURL=bleServoCommunicator.service.js.map
 
 /***/ }),
 
-/***/ 201:
+/***/ 202:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServoSettingsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_log_log_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_servos_servos_service__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_log_log_service__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_servos_servos_service__ = __webpack_require__(104);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -377,7 +410,7 @@ var ServoSettingsComponent = /** @class */ (function () {
     };
     ServoSettingsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-servoSettings',template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servoSettings/servoSettings.component.html"*/'<ion-content>  \n    <h2>Servo {{servoService.currentServo.id}}</h2>\n    <ion-list>\n        <ion-item>\n            <ion-range min="0" max="4095" [(ngModel)]=servoService.currentServo.pos (ionChange)=servoService.currentServo.sendPos($event)>\n                <ion-label range-left >\n                    Current pos: \n                </ion-label>\n            </ion-range>\n            <ion-range min="0" max="4095" [(ngModel)]=servoService.currentServo.pos (ionChange)=servoService.currentServo.sendPos($event)>\n                <ion-label range-left >\n                    Current pos: \n                </ion-label>\n            </ion-range>\n             \n            \n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servoSettings/servoSettings.component.html"*/,
+            selector: 'page-servoSettings',template:/*ion-inline-start:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servoSettings/servoSettings.component.html"*/'<ion-content>  \n    <h2>Servo {{servoService.currentServo.id}}</h2>\n    <ion-list>\n        <ion-item>\n            <ion-range min="0" max="4095" [(ngModel)]=servoService.currentServo.pos (ionChange)=servoService.currentServo.sendPos($event)>\n                <ion-label range-left >\n                    Current pos: \n                </ion-label>\n            </ion-range>\n            <ion-range min="0" max="4095" [(ngModel)]=servoService.currentServo.zero (ionChange)=servoService.currentServo.sendZero($event)>\n                <ion-label range-left >\n                    Zero: \n                </ion-label>\n            </ion-range>\n             \n            \n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/home/bb/Dropbox/src/SteeringMaria/SteeringMariaApp/src/pages/servoSettings/servoSettings.component.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__services_log_log_service__["a" /* LogService */], __WEBPACK_IMPORTED_MODULE_3__services_servos_servos_service__["a" /* ServoService */]])
     ], ServoSettingsComponent);
@@ -388,14 +421,14 @@ var ServoSettingsComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 202:
+/***/ 203:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_log_log_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_log_log_service__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -432,13 +465,13 @@ var LogsComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 203:
+/***/ 204:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(227);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -446,32 +479,34 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 226:
+/***/ 227:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_logs_logs_component__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_device_device_component__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_servos_servos_component__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_servoSettings_servoSettings_component__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_log_log_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_bledevice_bledevice_service__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_servos_servos_service__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_ble__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_logs_logs_component__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_device_device_component__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_servos_servos_component__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_servoSettings_servoSettings_component__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_log_log_service__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_bledevice_bledevice_service__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_bledevice_bleServoCommunicator_service__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_servos_servos_service__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_ble__ = __webpack_require__(102);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -519,13 +554,14 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_8__pages_servoSettings_servoSettings_component__["a" /* ServoSettingsComponent */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__["a" /* StatusBar */],
-                __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__["a" /* StatusBar */],
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__["a" /* SplashScreen */],
                 __WEBPACK_IMPORTED_MODULE_9__services_log_log_service__["a" /* LogService */],
                 __WEBPACK_IMPORTED_MODULE_10__services_bledevice_bledevice_service__["a" /* BleDeviceService */],
-                __WEBPACK_IMPORTED_MODULE_11__services_servos_servos_service__["a" /* ServoService */],
+                __WEBPACK_IMPORTED_MODULE_11__services_bledevice_bleServoCommunicator_service__["a" /* BleServoCommunicatorService */],
+                __WEBPACK_IMPORTED_MODULE_12__services_servos_servos_service__["a" /* ServoService */],
                 { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_14__ionic_native_ble__["a" /* BLE */]
+                __WEBPACK_IMPORTED_MODULE_15__ionic_native_ble__["a" /* BLE */]
             ]
         })
     ], AppModule);
@@ -536,16 +572,55 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 269:
+/***/ 24:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__logentry__ = __webpack_require__(278);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LogService = /** @class */ (function () {
+    function LogService() {
+        this.logs = [];
+    }
+    LogService.prototype.add = function (msg) {
+        this.logs.push(new __WEBPACK_IMPORTED_MODULE_1__logentry__["a" /* Logentry */](msg));
+    };
+    LogService.prototype.clear = function () {
+        this.logs = [];
+    };
+    LogService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [])
+    ], LogService);
+    return LogService;
+}());
+
+//# sourceMappingURL=log.service.js.map
+
+/***/ }),
+
+/***/ 270:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -582,7 +657,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 277:
+/***/ 278:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -599,11 +674,13 @@ var Logentry = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 278:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Bledevice; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__servos_servoConstants__ = __webpack_require__(51);
+
 var Bledevice = /** @class */ (function () {
     function Bledevice(ble, ngZone, logs, name, id) {
         this.ble = ble;
@@ -635,9 +712,24 @@ var Bledevice = /** @class */ (function () {
         return Object.assign(bdev, json, {});
     };
     Bledevice.prototype.sendCharacteristic = function (service, characteristic, buffer) {
-        this.ble.write(this.peripheral.id, service, characteristic, buffer).then(function () { return console.log("Success!"); }, //this.logs.add("Sending test command succeeded!"),
-        function (//this.logs.add("Sending test command succeeded!"),
-            e) { return console.log('Error!' + e); });
+        var _this = this;
+        this.ble.write(this.peripheral.id, service, characteristic, buffer).then(function () {
+            console.log("Success!");
+            _this.logs.add("Sending test command succeeded!");
+        }, function (e) {
+            console.log('Error!' + e);
+            _this.logs.add("Sending command failed!!");
+        });
+    };
+    Bledevice.prototype.getBufferFromDevice = function (service, characteristic, obToAttach, setter) {
+        var _this = this;
+        // We need a payload for writing to the device, lets create one
+        var buffer = new ArrayBuffer(1);
+        buffer[0] = 1;
+        this.ble.write(this.peripheral.id, service, characteristic, buffer).then(function () {
+            _this.ble.read(_this.peripheral.id, service, __WEBPACK_IMPORTED_MODULE_0__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_DORETURN).then(function (data) { return setter(obToAttach, data); }, function () { return console.log('Error! No data!'); });
+        }, function (e) { return console.log('Error!' + e); });
+        return 0;
     };
     return Bledevice;
 }());
@@ -646,37 +738,34 @@ var Bledevice = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 279:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Servo; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__servoConstants__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__servoConstants__ = __webpack_require__(51);
 
 var Servo = /** @class */ (function () {
-    function Servo(nr, ble, log) {
+    function Servo(nr, bleServo, log) {
         this.id = nr;
         this.pos = 0;
-        this.ble = ble;
+        this.leftLimit = 0;
+        this.rightLimit = __WEBPACK_IMPORTED_MODULE_0__servoConstants__["a" /* ServoConstants */].RESOLUTION_SERVOS;
+        this.zero = 0;
+        this.bleServo = bleServo;
         this.log = log;
+        this.initializeByle();
     }
-    // Pack the number to send and the own id in a common array buffer
-    Servo.prototype.toArrayBuffer = function (para) {
-        var tempBuffer = new ArrayBuffer(2);
-        var fView1 = new Uint16Array(tempBuffer);
-        fView1[0] = para;
-        var fview2 = new Uint8Array(tempBuffer);
-        var result = new ArrayBuffer(3);
-        var fview3 = new Uint8Array(result);
-        fview3[0] = this.id;
-        fview3[1] = fview2[0];
-        fview3[2] = fview2[1];
-        return result;
+    Servo.prototype.initializeByle = function () {
+        this.bleServo.requestZero(this);
     };
-    // Sending the position to ble!
+    // Sending the position !
     Servo.prototype.sendPos = function () {
-        var buffer = this.toArrayBuffer(this.pos);
-        this.ble.device.sendCharacteristic(__WEBPACK_IMPORTED_MODULE_0__servoConstants__["a" /* ServoConstants */].servoService, __WEBPACK_IMPORTED_MODULE_0__servoConstants__["a" /* ServoConstants */].setServoCharacteristic, buffer);
+        this.bleServo.sendPos(this);
+    };
+    // Sending the zero position!
+    Servo.prototype.sendZero = function () {
+        this.bleServo.sendZero(this);
     };
     return Servo;
 }());
@@ -685,44 +774,48 @@ var Servo = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 28:
+/***/ 51:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServoConstants; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__logentry__ = __webpack_require__(277);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 
-
-var LogService = /** @class */ (function () {
-    function LogService() {
-        this.logs = [];
+/*
+These constants need to have exactly the same vals as the constants in the sketch!
+ */
+var ServoConstants = /** @class */ (function () {
+    function ServoConstants() {
     }
-    LogService.prototype.add = function (msg) {
-        this.logs.push(new __WEBPACK_IMPORTED_MODULE_1__logentry__["a" /* Logentry */](msg));
-    };
-    LogService.prototype.clear = function () {
-        this.logs = [];
-    };
-    LogService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [])
-    ], LogService);
-    return LogService;
+    // Common settings
+    ServoConstants.NR_OF_SERVOS = 16;
+    ServoConstants.RESOLUTION_SERVOS = 4095;
+    // The settings for the bluetooth-communication:
+    ServoConstants.BLE_SERVICEADDRESS = '4d41';
+    ServoConstants.GATT_UID_SETSERVOPOS = '1010';
+    ServoConstants.GATT_UID_GETSERVOPOS = '1011';
+    ServoConstants.GATT_UID_SETSERVOZERO = '1020';
+    ServoConstants.GATT_UID_GETSERVOZERO = '1021';
+    ServoConstants.GATT_UID_SETSERVOLEFTLIMIT = '1030';
+    ServoConstants.GATT_UID_GETSERVOLEFTLIMIT = '1031';
+    ServoConstants.GATT_UID_SETSERVORIGHTLIMIT = '1040';
+    ServoConstants.GATT_UID_GETSERVORIGHTLIMIT = '1041';
+    ServoConstants.GATT_UID_DORETURN = '1050';
+    ServoConstants = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+    ], ServoConstants);
+    return ServoConstants;
 }());
 
-//# sourceMappingURL=log.service.js.map
+//# sourceMappingURL=servoConstants.js.map
 
 /***/ })
 
-},[203]);
+},[204]);
 //# sourceMappingURL=main.js.map

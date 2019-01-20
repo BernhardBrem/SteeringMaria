@@ -5,8 +5,7 @@
 #include "BluefruitConfig.h"
 #include "config.h"
 
-
- /**  Library SETTINGS
+/**  Library SETTINGS
 
     FACTORYRESET_ENABLE     Perform a factory reset when running this sketch
    
@@ -35,21 +34,23 @@
     MINIMUM_FIRMWARE_VERSION  Minimum firmware version to have some new features
  */
 
- 
-
 // Defs for the GATT-Cmds
 #define NAMECMD "AT+GAPDEVNAME=" BLE_DEVICENAME
 #define GATTADDSERVICE "AT+GATTADDSERVICE=uuid=" BLE_SERVICEADDRESS
 #define GATT_SERVO_PRE "AT+GATTADDCHAR=UUID="
 #define GATT_SERVO_POST ",PROPERTIES=0x08,MIN_LEN=3,MAX_LEN=3,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"
-#define GATT_SERVO_SETPOS  GATT_SERVO_PRE GATT_UID_SETSERVOPOS GATT_SERVO_POST
-
-
+#define GATT_SERVO_SETPOS GATT_SERVO_PRE GATT_UID_SETSERVOPOS GATT_SERVO_POST
+#define GATT_SERVO_SETZERO GATT_SERVO_PRE GATT_UID_SETSERVOZERO GATT_SERVO_POST
 
 // Static vars
+// Only for testing
+/*
 int32_t BLEService::charid_string;
 int32_t BLEService::charid_number;
-int32_t BLEService::charid_servos_set_direct;
+*/
+// The callback ids
+int32_t BLEService::charid_servos_setpos;
+int32_t BLEService::charid_servos_setzero;
 
 // The device
 //SoftwareSerial bluefruitSS = SoftwareSerial(BLUEFRUIT_SWUART_TXD_PIN, BLUEFRUIT_SWUART_RXD_PIN);
@@ -71,164 +72,186 @@ Adafruit_BluefruitLE_SPI ble(BLUEFRUIT_SPI_CS, BLUEFRUIT_SPI_IRQ, BLUEFRUIT_SPI_
 //                             BLUEFRUIT_SPI_IRQ, BLUEFRUIT_SPI_RST);
 
 // Servo Service
-ServoService* sinstance=ServoService::getInstance();
+ServoService *sinstance = ServoService::getInstance();
 //CallBacks:
-
 
 void BLEService::connected(void)
 {
-  Serial.println( F("Connected") );
+  Serial.println(F("Connected"));
 }
 
 void BLEService::disconnected(void)
 {
-  Serial.println( F("Disconnected") );
+  Serial.println(F("Disconnected"));
 }
 
 void BLEService::BleUartRX(char data[], uint16_t len)
 {
-  Serial.print( F("[BLE UART RX]" ) );
+  Serial.print(F("[BLE UART RX]"));
   Serial.write(data, len);
   Serial.println();
 }
 
+int8_t dataToServoNr(uint8_t data[]){
+    return uint8_t(data[0]);
+}
+
+int16_t dataToPos(uint8_t data[])
+{
+  uint8_t data1[2];
+  for (int i = 0; i < 2; i++)
+  {
+    data1[i] = data[i + 1];
+  }
+  int16_t pos;
+  memcpy(&pos, data1, 2);
+  return pos;
+}
+
 void BLEService::BleGattRX(int32_t chars_id, uint8_t data[], uint16_t len)
 {
-  //Serial.print( F("[BLE GATT RX] (" ) );
-  //Serial.print(chars_id);
-  //Serial.print(") ");
-  
+  Serial.print( F("[BLE GATT RX] (" ) );
+  Serial.print(chars_id);
+  Serial.print(F(") "));
+/*
   if (chars_id == charid_string)
-  {  
+  {
     Serial.write(data, len);
     Serial.println();
-  }else if (chars_id == charid_number)
+  }
+  else if (chars_id == charid_number)
   {
     int32_t val;
     memcpy(&val, data, len);
     Serial.println(val);
   }
-  else if (chars_id == charid_servos_set_direct)
+  else */ 
+  if (chars_id == charid_servos_setpos)
   {
-    //Serial.println(F("Calling set servo!"));
-    //Serial.println(data[0]);
-    uint8_t data1[2];
-    for (int i=0;i<2; i++){
-      data1[i]=data[i+1];
+    /* uint8_t data1[2];
+    for (int i = 0; i < 2; i++)
+    {
+      data1[i] = data[i + 1];
     }
-    int16_t pos;
+    int16_t pos; 
     memcpy(&pos, data1, 2);
-
-    sinstance->setServo(uint8_t(data[0]),pos);
+ 
+    sinstance->setPos(uint8_t(data[0]), pos);
+    */
+    sinstance->setPos(dataToServoNr(data),dataToPos(data));
   }
+  else if (chars_id == charid_servos_setzero)
+  {
+     sinstance->setZero(dataToServoNr(data),dataToPos(data));
+  }
+ 
 }
 
 // Ende Callbacks
 
-BLEService * BLEService::instance = 0;
+BLEService *BLEService::instance = 0;
 
-BLEService * BLEService::getInstance()
+BLEService *BLEService::getInstance()
 {
-    if (instance == 0)
-    {
-        instance = new BLEService();
-        Serial.println("Create BLE Singelton\n");
-    }
+  if (instance == 0)
+  {
+    instance = new BLEService();
+    Serial.println("Create BLE Singelton\n");
+  }
 
-    return instance;
+  return instance;
 }
 
-
-// The constructor; it is protected since we have a singleton 
-BLEService::BLEService(){
+// The constructor; it is protected since we have a singleton
+BLEService::BLEService()
+{
   //Serial.println(F("Constructor SMBlue"));
 }
 
+bool BLEService::init()
+{
+  Serial.println(F("1 OK!\n"));
 
-bool BLEService::init(){
-  Serial.println( F("1 OK!\n") );
-   
-  if ( !ble.begin(VERBOSE_MODE) )
+  if (!ble.begin(VERBOSE_MODE))
   {
-    Serial.println( F("2 NOK! \n") );
+    Serial.println(F("2 NOK! \n"));
     //error(F("Couldn't find Bluefruit, make sure it's in CoMmanD mode & check wiring?"));
   }
-  Serial.println( F("2 OK! \n") );
+  Serial.println(F("2 OK! \n"));
   Serial.println(F("Init the service!"));
   Serial.println(F("XXXX"));
-   
-
 
   //if ( !ble.begin(VERBOSE_MODE) )
   //{
   //  error(F("Couldn't find Bluefruit, make sure it's in CoMmanD mode & check wiring?"));
   //}
-  Serial.println( F("OK!") );
+  Serial.println(F("OK!"));
   Serial.println(F("...1"));
-  if ( FACTORYRESET_ENABLE )
+  if (FACTORYRESET_ENABLE)
   {
     /* Perform a factory reset to make sure everything is in a known state */
     Serial.println(F("Performing a factory reset: "));
-    if ( ! ble.factoryReset() ){
+    if (!ble.factoryReset())
+    {
       Serial.println(F("Couldn't factory reset"));
       return false;
     }
   }
-  
+
   Serial.println(F("...2"));
 
-  if (! ble.sendCommandCheckOK(F(NAMECMD)) ) {
+  if (!ble.sendCommandCheckOK(F(NAMECMD)))
+  {
     Serial.println("Could not set name!");
     //error(F("Could not set device name?"));
   }
-  
-  if ( !ble.isVersionAtLeast(MINIMUM_FIRMWARE_VERSION) )
+
+  if (!ble.isVersionAtLeast(MINIMUM_FIRMWARE_VERSION))
   {
     return false;
   }
   Serial.println(F("...3"));
-  Serial.println( F("Adding Service") );
-  Serial.println( F(GATTADDSERVICE) );
+  Serial.println(F("Adding Service"));
+  Serial.println(F(GATTADDSERVICE));
   // The service:
-  ble.sendCommandCheckOK( F(GATTADDSERVICE) );
+  ble.sendCommandCheckOK(F(GATTADDSERVICE));
   // Testing-chars - have to be removed
-  ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0x2000,PROPERTIES=0x08,MIN_LEN=1,MAX_LEN=6,DATATYPE=string,DESCRIPTION=string,VALUE=abc"), &charid_string);
-  ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0x2001,PROPERTIES=0x08,MIN_LEN=4,MAX_LEN=4,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"), &charid_number);
+  /*
+  ble.sendCommandWithIntReply(F("AT+GATTADDCHAR=UUID=0x2000,PROPERTIES=0x08,MIN_LEN=1,MAX_LEN=6,DATATYPE=string,DESCRIPTION=string,VALUE=abc"), &charid_string);
+  ble.sendCommandWithIntReply(F("AT+GATTADDCHAR=UUID=0x2001,PROPERTIES=0x08,MIN_LEN=4,MAX_LEN=4,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"), &charid_number);
+  */
   // Set servo position direct:
   // One byte to adress the servo, 2 bytes for the value
-  ble.sendCommandWithIntReply( F(GATT_SERVO_SETPOS), &charid_servos_set_direct);
-  
+  ble.sendCommandWithIntReply(F(GATT_SERVO_SETPOS), &charid_servos_setpos);
+  ble.sendCommandWithIntReply(F(GATT_SERVO_SETZERO), &charid_servos_setzero);
+
   ble.reset();
 
-  // Disable command echo from Bluefruit 
+  // Disable command echo from Bluefruit
   ble.echo(false);
 
   Serial.println("Requesting Bluefruit info:");
-  // Print Bluefruit information 
+  // Print Bluefruit information
   ble.info();
-  
-  // Set callbacks 
+
+  // Set callbacks
   ble.setConnectCallback(connected);
   ble.setDisconnectCallback(disconnected);
   ble.setBleUartRxCallback(BleUartRX);
-  
-  // Only one BLE GATT function should be set, it is possible to set it 
-  //multiple times for multiple Chars ID  
+
+  // Only one BLE GATT function should be set, it is possible to set it
+  //multiple times for multiple Chars ID
+  /*
   ble.setBleGattRxCallback(charid_string, BleGattRX);
   ble.setBleGattRxCallback(charid_number, BleGattRX);
-  ble.setBleGattRxCallback(charid_servos_set_direct, BleGattRX);
-  
+  */
+  ble.setBleGattRxCallback(charid_servos_setpos, BleGattRX);
+  ble.setBleGattRxCallback(charid_servos_setzero, BleGattRX);
   return true;
-  
 }
 
-void BLEService::update(){
+void BLEService::update()
+{
   //Serial.println(F("Update SMBlue"));
   ble.update(200);
 }
-
-
-
-
-
-

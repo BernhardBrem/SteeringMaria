@@ -11,24 +11,32 @@ export class Servo {
     zero: number;
     bleServo: BleServoCommunicatorService;
     log: LogService;
-
+    
 
 
     constructor(nr: number, bleServo: BleServoCommunicatorService, log: LogService) {
         this.id = nr;
         this.pos = 0;
         this.leftLimit=0;
-        this.rightLimit=ServoConstants.resolution_servos;
+        this.rightLimit=ServoConstants.RESOLUTION_SERVOS;
         this.zero=0;
         this.bleServo = bleServo;
         this.log = log;
+        this.initializeByle();
     }
 
-    
-    // Sending the position to ble!
+    initializeByle(){
+        this.bleServo.requestZero(this);
+    }
+
+    // Sending the position !
     sendPos() {
-       
         this.bleServo.sendPos(this);
+    }
+
+    // Sending the zero position!
+    sendZero() {
+        this.bleServo.sendZero(this);
     }
 
 }

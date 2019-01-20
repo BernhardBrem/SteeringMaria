@@ -16,7 +16,18 @@
 #define BLE_SERVICEADDRESS "0x4d41"
 
 // Definitions to set servo values
-#define GATT_UID_SETSERVO "0x1010"
+#define GATT_UID_SETSERVOPOS "0x1010"
+#define  GATT_UID_GETSERVOPOS "0x1011"
+  #define  GATT_UID_SETSERVOZERO "0x1020"
+  #define  GATT_UID_GETSERVOZERO "0X1021"
+  #define  GATT_UID_SETSERVOLEFTLIMIT "0x1030"
+  #define  GATT_UID_GETSERVOLEFTLIMIT "0x1031"
+  #define  GATT_UID_SETSERVORIGHTLIMIT "0x1040"
+  #define  GATT_UID_GETSERVORIGHTLIMIT "0x1041"
+
+
+
+
 
 // How many servos do we have?
 #define NR_OF_SERVOS 16

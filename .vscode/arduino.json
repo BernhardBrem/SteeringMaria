@@ -1,4 +1,6 @@
 {
     "board": "arduino:avr:mega",
-    "configuration": "cpu=atmega2560"
+    "configuration": "cpu=atmega2560",
+    "sketch": "SteeringMariaSketch/SteeringMariaSketch/SteeringMariaSketch.ino",
+    "port": "/dev/ttyACM0"
 }
