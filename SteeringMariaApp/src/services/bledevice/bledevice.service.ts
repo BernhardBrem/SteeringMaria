@@ -20,6 +20,7 @@ export class BleDeviceService {
       this.device.name = obj.name
       this.device.connected=false;
       this.device.connect()
+      console.log('BLEDeviceService: Connected' )
       
   }
   

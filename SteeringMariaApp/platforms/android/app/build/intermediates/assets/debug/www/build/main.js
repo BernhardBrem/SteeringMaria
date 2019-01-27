@@ -33,6 +33,7 @@ var BleDeviceService = /** @class */ (function () {
         this.device.name = obj.name;
         this.device.connected = false;
         this.device.connect();
+        console.log('BLEDeviceService: Connected');
     };
     BleDeviceService.prototype.clearDevice = function () {
     };
@@ -333,7 +334,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var BleServoCommunicatorService = /** @class */ (function () {
-    function BleServoCommunicatorService(ble, log) {
+    function BleServoCommunicatorService(bleDeviceService, log) {
+        this.bleDeviceService = bleDeviceService;
+        this.log = log;
     }
     // Pack the number to send and the own id in a common array buffer
     BleServoCommunicatorService.prototype.toArrayBuffer = function (servoId, para) {
@@ -350,7 +353,7 @@ var BleServoCommunicatorService = /** @class */ (function () {
     };
     BleServoCommunicatorService.prototype.sendPosLike = function (servo, posConstant) {
         var buffer = this.toArrayBuffer(servo.id, servo.pos);
-        this.ble.device.sendCharacteristic(__WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].BLE_SERVICEADDRESS, posConstant, buffer);
+        this.bleDeviceService.device.sendCharacteristic(__WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].BLE_SERVICEADDRESS, posConstant, buffer);
     };
     BleServoCommunicatorService.prototype.sendPos = function (servo) {
         this.sendPosLike(servo, __WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_SETSERVOPOS);
@@ -360,13 +363,17 @@ var BleServoCommunicatorService = /** @class */ (function () {
     };
     BleServoCommunicatorService.prototype.updateServoZero = function (servo, count) {
         servo.zero = count;
+        this.log.add("Set servo zero of servo " + servo.id.toString() + " to " + count.toString());
+        console.log("Set servo zero of servo " + servo.id.toString() + " to " + count.toString());
     };
     BleServoCommunicatorService.prototype.requestZero = function (servo) {
-        this.ble.device.getBufferFromDevice(__WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].BLE_SERVICEADDRESS, __WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_GETSERVOZERO, servo, this.updateServoZero);
+        console.log("bleServoCommunicatorService:RequestZero!");
+        this.bleDeviceService.device.getBufferFromDevice(__WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].BLE_SERVICEADDRESS, __WEBPACK_IMPORTED_MODULE_3__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_GETSERVOZERO, servo, this.updateServoZero);
     };
     BleServoCommunicatorService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__bledevice_service__["a" /* BleDeviceService */], __WEBPACK_IMPORTED_MODULE_2__log_log_service__["a" /* LogService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__bledevice_service__["a" /* BleDeviceService */],
+            __WEBPACK_IMPORTED_MODULE_2__log_log_service__["a" /* LogService */]])
     ], BleServoCommunicatorService);
     return BleServoCommunicatorService;
 }());
@@ -713,21 +720,26 @@ var Bledevice = /** @class */ (function () {
     };
     Bledevice.prototype.sendCharacteristic = function (service, characteristic, buffer) {
         var _this = this;
+        console.log("Send char " + characteristic + " to service " + service);
         this.ble.write(this.peripheral.id, service, characteristic, buffer).then(function () {
             console.log("Success!");
-            _this.logs.add("Sending test command succeeded!");
+            _this.logs.add("Success Send command succeeded!");
         }, function (e) {
             console.log('Error!' + e);
-            _this.logs.add("Sending command failed!!");
+            _this.logs.add("Error Send command!");
         });
     };
     Bledevice.prototype.getBufferFromDevice = function (service, characteristic, obToAttach, setter) {
         var _this = this;
         // We need a payload for writing to the device, lets create one
+        console.log("get buffer for " + characteristic + " of service " + service);
         var buffer = new ArrayBuffer(1);
         buffer[0] = 1;
         this.ble.write(this.peripheral.id, service, characteristic, buffer).then(function () {
-            _this.ble.read(_this.peripheral.id, service, __WEBPACK_IMPORTED_MODULE_0__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_DORETURN).then(function (data) { return setter(obToAttach, data); }, function () { return console.log('Error! No data!'); });
+            _this.ble.read(_this.peripheral.id, service, __WEBPACK_IMPORTED_MODULE_0__servos_servoConstants__["a" /* ServoConstants */].GATT_UID_DORETURN).then(function (data) {
+                console.log("Got data!");
+                setter(obToAttach, data);
+            }, function () { return console.log('Error! No data!'); });
         }, function (e) { return console.log('Error!' + e); });
         return 0;
     };

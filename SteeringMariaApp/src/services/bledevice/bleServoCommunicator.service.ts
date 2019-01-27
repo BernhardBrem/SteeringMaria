@@ -10,8 +10,8 @@ export class BleServoCommunicatorService {
 
 
     ble: BleDeviceService;
-    constructor( ble: BleDeviceService, log: LogService) {
-        
+    constructor(  private bleDeviceService: BleDeviceService,
+                 private log: LogService) {
     }
 
     // Pack the number to send and the own id in a common array buffer
@@ -28,9 +28,9 @@ export class BleServoCommunicatorService {
         return result;
     }
 
-    sendPosLike(servo:Servo, posConstant:String){
+    sendPosLike(servo:Servo, posConstant:string){
         let buffer = this.toArrayBuffer(servo.id, servo.pos)
-        this.ble.device.sendCharacteristic(ServoConstants.BLE_SERVICEADDRESS, posConstant, buffer);
+        this.bleDeviceService.device.sendCharacteristic(ServoConstants.BLE_SERVICEADDRESS, posConstant, buffer);
     }
     
     sendPos(servo: Servo) {
@@ -43,10 +43,13 @@ export class BleServoCommunicatorService {
 
     updateServoZero(servo:Servo,count:number){
         servo.zero=count;
+        this.log.add("Set servo zero of servo " + servo.id.toString() + " to " + count.toString());
+        console.log("Set servo zero of servo " + servo.id.toString() + " to " + count.toString());
     }
 
     requestZero(servo: Servo): any {
-        this.ble.device.getBufferFromDevice(ServoConstants.BLE_SERVICEADDRESS, ServoConstants.GATT_UID_GETSERVOZERO, servo, this.updateServoZero );
+        console.log("bleServoCommunicatorService:RequestZero!");
+        this.bleDeviceService.device.getBufferFromDevice(ServoConstants.BLE_SERVICEADDRESS, ServoConstants.GATT_UID_GETSERVOZERO, servo, this.updateServoZero );
     }
 
 }

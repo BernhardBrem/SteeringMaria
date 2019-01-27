@@ -25,6 +25,10 @@ protected:
   //static int32_t charid_number;
   static int32_t BLEService::charid_servos_setpos;
   static int32_t BLEService::charid_servos_setzero;
+  static int32_t BLEService::charid_servos_getpos;
+  static int32_t BLEService::charid_servos_getzero;
+  static int32_t BLEService::BLEService::charid_backchannel;
+
 
   // Callback functions
   static void connected(void);

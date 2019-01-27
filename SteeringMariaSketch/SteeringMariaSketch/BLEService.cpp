@@ -7,24 +7,24 @@
 
 /**  Library SETTINGS
 
-    FACTORYRESET_ENABLE     Perform a factory reset when running this sketch
-   
-                            Enabling this will put your Bluefruit LE module
+      FACTORYRESET_ENABLE     Perform a factory reset when running this sketch
+     
+                              Enabling this will put your Bluefruit LE module
                             in a 'known good' state and clear any config
                             data set in previous sketches or projects, so
-                            running this at least once is a good idea.
-   
-                            When deploying your project, however, you will
+                              running this at least once is a good idea.
+     
+                              When deploying your project, however, you will
                             want to disable factory reset by setting this
                             value to 0.  If you are making changes to your
-                            Bluefruit LE device via AT commands, and those
+                              Bluefruit LE device via AT commands, and those
                             changes aren't persisting across resets, this
                             is the reason why.  Factory reset will erase
                             the non-volatile memory where config data is
                             stored, setting it back to factory default
                             values.
-       
-                            Some sketches that require you to bond to a
+         
+                              Some sketches that require you to bond to a
                             central device (HID mouse, keyboard, etc.)
                             won't work at all with this feature enabled
                             since the factory reset will clear all of the
@@ -32,25 +32,35 @@
                             central device won't be able to reconnect.
 
     MINIMUM_FIRMWARE_VERSION  Minimum firmware version to have some new features
- */
+*/
 
 // Defs for the GATT-Cmds
 #define NAMECMD "AT+GAPDEVNAME=" BLE_DEVICENAME
 #define GATTADDSERVICE "AT+GATTADDSERVICE=uuid=" BLE_SERVICEADDRESS
 #define GATT_SERVO_PRE "AT+GATTADDCHAR=UUID="
 #define GATT_SERVO_POST ",PROPERTIES=0x08,MIN_LEN=3,MAX_LEN=3,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"
+#define GATT_SERVO_GET_POST ",PROPERTIES=0x08,MIN_LEN=1,MAX_LEN=1,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"
+
 #define GATT_SERVO_SETPOS GATT_SERVO_PRE GATT_UID_SETSERVOPOS GATT_SERVO_POST
 #define GATT_SERVO_SETZERO GATT_SERVO_PRE GATT_UID_SETSERVOZERO GATT_SERVO_POST
+#define GATT_SERVO_GETPOS GATT_SERVO_PRE GATT_UID_GETSERVOPOS GATT_SERVO_GET_POST
+#define GATT_SERVO_GETZERO GATT_SERVO_PRE GATT_UID_GETSERVOZERO GATT_SERVO_GET_POST
+
+#define GATT_RETUTNCHANNEL GATT_SERVO_PRE GATT_UID_DORETURN ", PROPERTIES=0x10, MIN_LEN=2, MAX_LEN=2, VALUE=00-40"
+
 
 // Static vars
 // Only for testing
 /*
-int32_t BLEService::charid_string;
-int32_t BLEService::charid_number;
+  int32_t BLEService::charid_string;
+  int32_t BLEService::charid_number;
 */
 // The callback ids
 int32_t BLEService::charid_servos_setpos;
+int32_t BLEService::charid_servos_getpos;
 int32_t BLEService::charid_servos_setzero;
+int32_t BLEService::charid_servos_getzero;
+int32_t BLEService::charid_backchannel;
 
 // The device
 //SoftwareSerial bluefruitSS = SoftwareSerial(BLUEFRUIT_SWUART_TXD_PIN, BLUEFRUIT_SWUART_RXD_PIN);
@@ -92,8 +102,8 @@ void BLEService::BleUartRX(char data[], uint16_t len)
   Serial.println();
 }
 
-int8_t dataToServoNr(uint8_t data[]){
-    return uint8_t(data[0]);
+int8_t dataToServoNr(uint8_t data[]) {
+  return uint8_t(data[0]);
 }
 
 int16_t dataToPos(uint8_t data[])
@@ -108,43 +118,63 @@ int16_t dataToPos(uint8_t data[])
   return pos;
 }
 
+uint8_t * posToData(uint16_t pos)
+{
+  static uint8_t data1[2];
+  memcpy(data1,(uint16_t*)&(pos),2);
+  return data1;
+}
+
+
+
 void BLEService::BleGattRX(int32_t chars_id, uint8_t data[], uint16_t len)
 {
   Serial.print( F("[BLE GATT RX] (" ) );
   Serial.print(chars_id);
   Serial.print(F(") "));
-/*
-  if (chars_id == charid_string)
-  {
-    Serial.write(data, len);
-    Serial.println();
-  }
-  else if (chars_id == charid_number)
-  {
-    int32_t val;
-    memcpy(&val, data, len);
-    Serial.println(val);
-  }
-  else */ 
+  /*
+    if (chars_id == charid_string)
+    {
+      Serial.write(data, len);
+      Serial.println();
+    }
+    else if (chars_id == charid_number)
+    {
+      int32_t val;
+      memcpy(&val, data, len);
+      Serial.println(val);
+    }
+    else */
   if (chars_id == charid_servos_setpos)
   {
     /* uint8_t data1[2];
-    for (int i = 0; i < 2; i++)
-    {
+      for (int i = 0; i < 2; i++)
+      {
       data1[i] = data[i + 1];
-    }
-    int16_t pos; 
-    memcpy(&pos, data1, 2);
- 
-    sinstance->setPos(uint8_t(data[0]), pos);
+      }
+      int16_t pos;
+      memcpy(&pos, data1, 2);
+
+      sinstance->setPos(uint8_t(data[0]), pos);
     */
-    sinstance->setPos(dataToServoNr(data),dataToPos(data));
+    sinstance->setPos(dataToServoNr(data), dataToPos(data));
   }
   else if (chars_id == charid_servos_setzero)
   {
-     sinstance->setZero(dataToServoNr(data),dataToPos(data));
+    sinstance->setZero(dataToServoNr(data), dataToPos(data));
   }
- 
+  else if (chars_id == charid_servos_getzero) {
+    Serial.println(F("Requesting zero pos"));
+    uint16_t pos = sinstance->getZero(dataToServoNr(data));
+    Serial.println(F("Sending!"));
+    ble.print( F("AT+GATTCHAR=") );
+    ble.print( charid_backchannel );
+    ble.println(*posToData(pos));
+    Serial.println(F("Sent!"));
+  }
+
+
+
 }
 
 // Ende Callbacks
@@ -217,14 +247,28 @@ bool BLEService::init()
   ble.sendCommandCheckOK(F(GATTADDSERVICE));
   // Testing-chars - have to be removed
   /*
-  ble.sendCommandWithIntReply(F("AT+GATTADDCHAR=UUID=0x2000,PROPERTIES=0x08,MIN_LEN=1,MAX_LEN=6,DATATYPE=string,DESCRIPTION=string,VALUE=abc"), &charid_string);
-  ble.sendCommandWithIntReply(F("AT+GATTADDCHAR=UUID=0x2001,PROPERTIES=0x08,MIN_LEN=4,MAX_LEN=4,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"), &charid_number);
+    ble.sendCommandWithIntReply(F("AT+GATTADDCHAR=UUID=0x2000,PROPERTIES=0x08,MIN_LEN=1,MAX_LEN=6,DATATYPE=string,DESCRIPTION=string,VALUE=abc"), &charid_string);
+    ble.sendCommandWithIntReply(F("AT+GATTADDCHAR=UUID=0x2001,PROPERTIES=0x08,MIN_LEN=4,MAX_LEN=4,DATATYPE=INTEGER,DESCRIPTION=number,VALUE=0"), &charid_number);
   */
   // Set servo position direct:
   // One byte to adress the servo, 2 bytes for the value
+  Serial.print(F("sendCommandWithIntReply(): "));
+  Serial.print(F(GATT_SERVO_SETPOS));
   ble.sendCommandWithIntReply(F(GATT_SERVO_SETPOS), &charid_servos_setpos);
+  Serial.print(F("sendCommandWithIntReply(): "));
+  Serial.print(F(GATT_SERVO_SETZERO));
   ble.sendCommandWithIntReply(F(GATT_SERVO_SETZERO), &charid_servos_setzero);
+  Serial.print(F("sendCommandWithIntReply(): "));
+  Serial.print(F(GATT_SERVO_GETPOS));
+  ble.sendCommandWithIntReply(F(GATT_SERVO_GETPOS), &charid_servos_getpos);
+  Serial.print(F("sendCommandWithIntReply(): "));
+  Serial.print(F(GATT_SERVO_GETZERO));
+  ble.sendCommandWithIntReply(F(GATT_SERVO_GETZERO), &charid_servos_getzero);
+  ble.sendCommandWithIntReply( F(GATT_RETUTNCHANNEL), &charid_backchannel);
+  
 
+  /* Reset the device for the new service setting changes to take effect */
+  Serial.print(F("Performing a SW reset (service changes require a reset): "));
   ble.reset();
 
   // Disable command echo from Bluefruit
@@ -242,11 +286,14 @@ bool BLEService::init()
   // Only one BLE GATT function should be set, it is possible to set it
   //multiple times for multiple Chars ID
   /*
-  ble.setBleGattRxCallback(charid_string, BleGattRX);
-  ble.setBleGattRxCallback(charid_number, BleGattRX);
+    ble.setBleGattRxCallback(charid_string, BleGattRX);
+    ble.setBleGattRxCallback(charid_number, BleGattRX);
   */
+  Serial.println(F("Set callback for set servos "));
   ble.setBleGattRxCallback(charid_servos_setpos, BleGattRX);
   ble.setBleGattRxCallback(charid_servos_setzero, BleGattRX);
+  ble.setBleGattRxCallback(charid_servos_getpos, BleGattRX);
+  ble.setBleGattRxCallback(charid_servos_getzero, BleGattRX);
   return true;
 }
 

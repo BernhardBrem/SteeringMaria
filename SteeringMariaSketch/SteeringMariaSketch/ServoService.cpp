@@ -84,6 +84,7 @@ uint16_t ServoService::getRightLimit(uint8_t nr){
 }
 
 uint16_t ServoService::getZero(uint8_t nr){
-  //Serial.println(nr);
+  Serial.println(F("Return zero"));
+  Serial.println(nr);
   return servos[nr].getZero();  
 }

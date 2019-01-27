@@ -60,15 +60,16 @@ export class Bledevice {
         });
     }
 
-    sendCharacteristic(service, characteristic, buffer) {
+    sendCharacteristic(service:string, characteristic:string, buffer:ArrayBuffer) {
+        console.log("Send char " + characteristic + " to service " + service)
         this.ble.write(this.peripheral.id, service, characteristic, buffer).then(
             () => {
                 console.log("Success!");
-                this.logs.add("Sending test command succeeded!")
+                this.logs.add("Success Send command succeeded!")
             }, 
             e => {
             console.log('Error!' + e);
-            this.logs.add("Sending command failed!!")
+            this.logs.add("Error Send command!")
             }
         )
     }
@@ -77,13 +78,17 @@ export class Bledevice {
 
     getBufferFromDevice(service:string, characteristic:string, obToAttach: any, setter: (arg0: any,arg1: any) => any ) {
         // We need a payload for writing to the device, lets create one
+        console.log("get buffer for " + characteristic + " of service " + service)
         let buffer = new ArrayBuffer(1);
         buffer[0]=1;
         this.ble.write(this.peripheral.id, service, characteristic,buffer).then(
             () => {
                 this.ble.read(this.peripheral.id,service,ServoConstants.GATT_UID_DORETURN).then(
 
-                    data => setter(obToAttach, data),
+                    data => {
+                        console.log("Got data!")
+                        setter(obToAttach, data)
+                    },
                     () => console.log('Error! No data!' )
                 )
 
