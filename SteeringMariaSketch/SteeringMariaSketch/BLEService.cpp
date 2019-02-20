@@ -118,12 +118,6 @@ int16_t dataToPos(uint8_t data[])
   return pos;
 }
 
-uint8_t * posToData(uint16_t pos)
-{
-  static uint8_t data1[2];
-  memcpy(data1,(uint16_t*)&(pos),2);
-  return data1;
-}
 
 
 
@@ -166,10 +160,11 @@ void BLEService::BleGattRX(int32_t chars_id, uint8_t data[], uint16_t len)
   else if (chars_id == charid_servos_getzero) {
     Serial.println(F("Requesting zero pos"));
     uint16_t pos = sinstance->getZero(dataToServoNr(data));
-    Serial.println(F("Sending!"));
+    Serial.print(F("Sending!"));
+    Serial.print(pos,HEX);
     ble.print( F("AT+GATTCHAR=") );
     ble.print( charid_backchannel );
-    ble.println(*posToData(pos));
+    ble.println(pos);
     Serial.println(F("Sent!"));
   }
 
