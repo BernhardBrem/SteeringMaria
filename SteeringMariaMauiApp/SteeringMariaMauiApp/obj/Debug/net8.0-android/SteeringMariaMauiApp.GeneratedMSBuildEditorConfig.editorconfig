@@ -1,0 +1,53 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = true
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0-android
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SteeringMariaMaui
+build_property.ProjectDir = /home/bb/Dropbox/Src/SteeringMaria/SteeringMariaMauiApp/SteeringMariaMauiApp/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+
+[/home/bb/Dropbox/Src/SteeringMaria/SteeringMariaMauiApp/SteeringMariaMauiApp/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SteeringMariaMaui.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[/home/bb/Dropbox/Src/SteeringMaria/SteeringMariaMauiApp/SteeringMariaMauiApp/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SteeringMariaMaui.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[/home/bb/Dropbox/Src/SteeringMaria/SteeringMariaMauiApp/SteeringMariaMauiApp/BluetoothPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SteeringMariaMaui.BluetoothPage.xaml
+build_metadata.AdditionalFiles.TargetPath = BluetoothPage.xaml
+build_metadata.AdditionalFiles.RelativePath = BluetoothPage.xaml
+
+[/home/bb/Dropbox/Src/SteeringMaria/SteeringMariaMauiApp/SteeringMariaMauiApp/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SteeringMariaMaui.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[/home/bb/Dropbox/Src/SteeringMaria/SteeringMariaMauiApp/SteeringMariaMauiApp/Resources/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SteeringMariaMaui.Resources.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources/Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources/Colors.xaml
+
+[/home/bb/Dropbox/Src/SteeringMaria/SteeringMariaMauiApp/SteeringMariaMauiApp/Resources/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SteeringMariaMaui.Resources.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources/Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources/Styles.xaml

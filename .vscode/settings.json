@@ -1,5 +1,8 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "C_Cpp.intelliSenseEngineFallback": "Disabled",
-    "dotnet.defaultSolution": "MauiApp1.sln"
+    "dotnet.defaultSolution": "SteeringMariaMauiApp.sln",
+    "maui.configuration.javaSdkPreferredPath": "/usr/lib64/jvm/java-17-openjdk",
+    "maui.configuration.debugVerbosity": "detailed",
+    "maui.configuration.androidSdkPreferredPath": "/home/bb/Dropbox/programme/AndroidStudio2023/android_sdk"
 }
