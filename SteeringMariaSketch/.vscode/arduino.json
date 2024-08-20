@@ -1,5 +1,5 @@
-{
-    "board": "arduino:avr:uno",
-    "sketch": "SteeringMariaSketch/SteeringMariaSketch.ino",
-    "programmer": "arduinoisp"
-}
+#{
+#    "board": "arduino:avr:uno",
+#    "sketch": "SteeringMariaSketch/SteeringMariaSketch.ino",
+#    "programmer": "arduinoisp"
+#}

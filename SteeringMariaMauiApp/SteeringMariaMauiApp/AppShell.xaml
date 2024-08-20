@@ -13,10 +13,10 @@
                 ContentTemplate="{DataTemplate local:BluetoothPage}"
                 Route="OnePage" /> 
         </Tab>
-        <Tab Title="Two" Icon="{StaticResource IconTwo}">
+        <Tab Title="Channels" Icon="{StaticResource IconTwo}">
             <ShellContent
-                Title="Two"
-                ContentTemplate="{DataTemplate local:MainPage}"
+                Title="Channels"
+                ContentTemplate="{DataTemplate local:ChannelSelectionPage}"
                 Route="TwoPage" />
         </Tab>
         <Tab Title="Three" Icon="{StaticResource IconThree}">
