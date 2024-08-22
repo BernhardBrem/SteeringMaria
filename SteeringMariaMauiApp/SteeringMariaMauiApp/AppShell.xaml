@@ -9,14 +9,14 @@
     <TabBar>
         <Tab Title="Bl" Icon="{StaticResource IconOne}">
             <ShellContent
-                Title="Bluetooth"
-                ContentTemplate="{DataTemplate local:BluetoothPage}"
+                Title="Base Settings"
+                ContentTemplate="{DataTemplate local:BaseSettingPage}"
                 Route="OnePage" /> 
         </Tab>
-        <Tab Title="Channels" Icon="{StaticResource IconTwo}">
+        <Tab Title="Led Status" Icon="{StaticResource IconTwo}">
             <ShellContent
-                Title="Channels"
-                ContentTemplate="{DataTemplate local:ChannelSelectionPage}"
+                Title="LED Status"
+                ContentTemplate="{DataTemplate local:LedStatusPage}"
                 Route="TwoPage" />
         </Tab>
         <Tab Title="Three" Icon="{StaticResource IconThree}">
