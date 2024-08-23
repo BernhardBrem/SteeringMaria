@@ -11,7 +11,5 @@ public partial class App : Application
 	}
 
 	
-	private static readonly DataModel dModel = new DataModel();
-
-    public static DataModel DataModel => dModel;
+	
 }

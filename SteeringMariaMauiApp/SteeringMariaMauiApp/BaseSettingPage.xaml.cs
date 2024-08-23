@@ -1,3 +1,4 @@
+using SteeringMariaMaui.Model;
 namespace SteeringMariaMaui;
 
 
@@ -9,6 +10,7 @@ public partial class BaseSettingPage : ContentPage
 		InitializeComponent();
 		if (Preferences.Default.ContainsKey("baseurl")) {
 			BaseUrl.Text=Preferences.Default.Get("baseurl","");
+            DataModel.SetURI(BaseUrl.Text);
 		}
 	}
 
