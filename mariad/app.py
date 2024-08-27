@@ -1,7 +1,41 @@
-from flask import Flask
+import flask 
+import json
+import PCA9685 
+import LedControler
+import serial
+from flask import request
+app = flask.Flask(__name__)
+# Servo board
+PWM = PCA9685.PCA9685(0x40, debug=False)
+PWM.setPWMFreq(50)
 
-app = Flask(__name__)
+ledNames=["Steuerboard","Backboard","Mast"]
+
+ledManager=LedControler.LedControlerManager()
+for name in ledNames:
+   ledManager.addControler(name,LedControler.LedControler(PWM))
+ledManager.start()
+
+def respond(o):
+   resp=flask.Response(json.dumps(o))
+   resp.headers['Content-Type']='application/json'
+   return resp
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+   return respond(["Hello","World"])
+    
+@app.route("/LED/Status", methods=['GET', 'POST','PUT'])
+def LedStatus():
+   print(f"YYYY{request}")
+   if request.method == 'POST'or request.method == 'PUT':
+      print(f"XXXX{request.form}")
+      for k in request.form:
+         print("X"+k)
+         print("y"+str(request.form[k]))
+      print("z"+str(request.get_json()))
+   result=[]
+   for l in ledNames:
+      result.append(ledManager.getStatus(l))
+   return respond(result)
+

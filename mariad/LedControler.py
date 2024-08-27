@@ -4,7 +4,7 @@ from threading import Thread,Lock
 import random
 
 class LedControler:
-    def __init__(self, pwm, channel):
+    def __init__(self, pwm, channel=-1):
         self.channel=channel
         self.pwm=pwm
         self.on=False
@@ -35,14 +35,15 @@ class LedControler:
 
 
     def update(self):
-        if self.on:
-            #print("On!")
-            #print("Set brightness to " + str(self.brightness))
-            self.changeBrightnes()
-            self.pwm.setServoPulse(self.channel,self.actualBrightnes)
-        else:
-            #print("Off!")
-            self.pwm.setServoPulse(self.channel,0)
+        if self.channel != -1:
+            if self.on:
+                #print("On!")
+                #print("Set brightness to " + str(self.brightness))
+                self.changeBrightnes()
+                self.pwm.setServoPulse(self.channel,self.actualBrightnes)
+            else:
+                #print("Off!")
+                self.pwm.setServoPulse(self.channel,0)
 
 
 
@@ -67,6 +68,10 @@ class LedControlerManager:
             self.lock.release()
             #print("Released")
             sleep(0.02)
+    
+    def getStatus(self,name):
+        if name in self.LedControlers:
+            return {"Name":name, "On":self.LedControlers[name].on}
 
     def start(self):
        t = Thread(target=self.loop)#, args=(self,))
