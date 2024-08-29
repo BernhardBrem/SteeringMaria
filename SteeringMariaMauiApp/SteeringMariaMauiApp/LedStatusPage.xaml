@@ -4,15 +4,27 @@
              x:Class="SteeringMariaMaui.LedStatusPage">
 			 
     <ScrollView>
-        <VerticalStackLayout >
-    
-            
-            <StackLayout>
-                <Label Text="Led" />
-                <RadioButton Content="All on" />
-                <RadioButton Content="All Off" IsChecked="true" />
-            </StackLayout>
+    <VerticalStackLayout >
+    <Label Text="All"/>
+    <Grid x:Name="AllLedStatus">
+       <Grid.RowDefinitions>
+          <RowDefinition />
+          <RowDefinition />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+       <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Text="On"/>
+        <Label Grid.Row="1" Grid.Column="0" Text="Off"/>
+        <Label Grid.Row="2" Grid.Column="0" Text="LEDs:"/>
+        <CheckBox x:Name="AllLedOn" Grid.Row="0" Grid.Column="1" IsChecked="False"  ></CheckBox>
+        <CheckBox x:Name="AllLedOff" Grid.Row="1" Grid.Column="1" IsChecked="False"  ></CheckBox>
+        
+    </Grid>
     </VerticalStackLayout>
+    
     </ScrollView>
  
 </ContentPage>

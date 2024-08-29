@@ -21,6 +21,7 @@ public partial class BaseSettingPage : ContentPage
 
 	private void OnEntryCompleted(object sender, EventArgs e){
         Preferences.Default.Set("baseurl",((Entry)sender).Text);
+		DataModel.SetURI(((Entry)sender).Text);
 	}
 }
 
