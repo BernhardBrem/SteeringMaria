@@ -29,11 +29,9 @@ def hello_world():
 def LedStatus():
    print(f"YYYY{request}")
    if request.method == 'POST'or request.method == 'PUT':
-      print(f"XXXX{request.form}")
-      for k in request.form:
-         print("X"+k)
-         print("y"+str(request.form[k]))
-      print("z"+str(request.get_json()))
+      allLedStatus=json.loads(request.get_json()))
+      print(allLedStatus)
+      ledManager.putStatus(allLedStatus)
    result=[]
    for l in ledNames:
       result.append(ledManager.getStatus(l))

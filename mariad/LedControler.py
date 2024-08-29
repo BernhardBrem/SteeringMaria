@@ -5,27 +5,30 @@ import random
 
 class LedControler:
     def __init__(self, pwm, channel=-1):
-        self.channel=channel
+        
         self.pwm=pwm
         self.on=False
-        self.brightnes=2500
-        self.brightnesspan=5+2*random.random()
-        self.brightnesfactor=0.7
+        self.settings={
+          "channel": channel,
+          "brightnes": 2500,
+          "brightnesspan":10,
+         "brightnesfactor": 0.7
+        }
         self.brightnestime=monotonic()
         self.actualBrightnes=2500
         self.brightnesDown=True
 
     def changeBrightnes(self):
         t=monotonic()
-        startBrightnes=self.brightnes
-        if (t < self.brightnestime + self.brightnesspan):
+        startBrightnes=self.settings["brightnes"]
+        if (t < self.brightnestime + self.settings["brightnesspan"]):
             delta=t-self.brightnestime
-            factor = self.brightnesfactor*(delta/self.brightnesspan)
+            factor = self.settings["brightnesfactor"]*(delta/self.settings["brightnesspan"])
             if self.brightnesDown:
-                self.actualBrightnes=self.brightnes - factor*self.brightnes
+                self.actualBrightnes=self.settings["brightnes"] - factor*self.settings["brightnes"]
                 #print(self.actualBrightnes)
             else:
-                self.actualBrightnes=self.brightnes - self.brightnesfactor*self.brightnes + factor*self.brightnes
+                self.actualBrightnes=self.settings["brightnes"] - self.settings["brightnesfactor"]*self.settings["brightnes"] + factor*self.settings["brightnes"]
         else:
             # Change the direction
             self.brightnesDown = not(self.brightnesDown)
@@ -35,15 +38,15 @@ class LedControler:
 
 
     def update(self):
-        if self.channel != -1:
+        if self.settings["channel"] != -1:
             if self.on:
                 #print("On!")
                 #print("Set brightness to " + str(self.brightness))
                 self.changeBrightnes()
-                self.pwm.setServoPulse(self.channel,self.actualBrightnes)
+                self.pwm.setServoPulse(self.settings["channel"],self.actualBrightnes)
             else:
                 #print("Off!")
-                self.pwm.setServoPulse(self.channel,0)
+                self.pwm.setServoPulse(self.settings["channel"],0)
 
 
 
@@ -72,6 +75,12 @@ class LedControlerManager:
     def getStatus(self,name):
         if name in self.LedControlers:
             return {"Name":name, "On":self.LedControlers[name].on}
+    
+    def putStatus(self,status):
+        for l in status:
+            if l["name"] in self.LedControlers:
+                self.LedControlers["name"].on=status["On"]
+
 
     def start(self):
        t = Thread(target=self.loop)#, args=(self,))
