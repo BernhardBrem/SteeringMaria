@@ -11,9 +11,9 @@ PWM.setPWMFreq(50)
 
 ledNames=["Steuerboard","Backboard","Mast"]
 
-ledManager=LedControler.LedControlerManager()
+ledManager=LedControler.LedControlerManager(PWM)
 for name in ledNames:
-   ledManager.addControler(name,LedControler.LedControler(PWM))
+   ledManager.addControler(name)
 ledManager.start()
 
 def respond(o):
@@ -29,7 +29,7 @@ def hello_world():
 def LedStatus():
    print(f"YYYY{request}")
    if request.method == 'POST'or request.method == 'PUT':
-      allLedStatus=json.loads(request.get_json()))
+      allLedStatus=json.loads(request.get_json())
       print(allLedStatus)
       ledManager.putStatus(allLedStatus)
    result=[]

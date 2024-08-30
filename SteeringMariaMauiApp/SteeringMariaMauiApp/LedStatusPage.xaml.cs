@@ -31,6 +31,33 @@ public partial class LedStatusPage : ContentPage
 		AllLedOff.IsChecked=allOff;
 	}
     
+	void OnAllOnChanged(object sender, CheckedChangedEventArgs e){
+		Trace.WriteLine("Changed On");
+       	bool on =(CheckBox)object.IsChecked;
+	   	if (on){
+			foreach(KeyValuePair<string, CheckBox> entry in gridpositions){
+				var status = new LedControler.LedStatus
+				{
+					entry.Value.IsChecked = true;
+				};
+			AllLedOff.IsChecked=false;
+	   }
+	}
+
+
+	void OnAllOffChanged(object sender, CheckedChangedEventArgs e){
+		Trace.WriteLine("Changed Off!");
+        bool off =(CheckBox)object.IsChecked;
+	   	if (off){
+			foreach(KeyValuePair<string, CheckBox> entry in gridpositions){
+				var status = new LedControler.LedStatus
+				{
+					entry.Value.IsChecked = false;
+				};
+			AllLedOn.IsChecked=false;
+	   }
+	}
+
 	bool blockBoxChecked = false;
 	void OnCheckedChanged(object sender, CheckedChangedEventArgs e)
 	{

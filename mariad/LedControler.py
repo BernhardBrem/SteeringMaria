@@ -1,19 +1,14 @@
 #!/bin/python3
 from time import sleep, perf_counter, monotonic
 from threading import Thread,Lock
-import random
+import SettingsManager
 
 class LedControler:
-    def __init__(self, pwm, channel=-1):
+    def __init__(self, pwm, settings):
         
         self.pwm=pwm
         self.on=False
-        self.settings={
-          "channel": channel,
-          "brightnes": 2500,
-          "brightnesspan":10,
-         "brightnesfactor": 0.7
-        }
+        self.settings=settings
         self.brightnestime=monotonic()
         self.actualBrightnes=2500
         self.brightnesDown=True
@@ -51,13 +46,21 @@ class LedControler:
 
 
 class LedControlerManager:
-    def __init__(self):
+    def __init__(self,pwm):
         self.LedControlers={}
         self.lock=Lock()
         self.run=True
+        self.pwm=pwm
 
-    def addControler(self,name,controler):
-        self.LedControlers[name]=controler
+    def addControler(self,name):
+        prefs={
+          "channel": -1,
+          "brightnes": 2500,
+          "brightnesspan":10,
+         "brightnesfactor": 0.7
+        }
+        settings=SettingsManager.getSettings("/LED"+name,prefs)
+        self.LedControlers[name]=LedControler(self.pwm,settings)
 
     def loop(self):
         while(self.run):

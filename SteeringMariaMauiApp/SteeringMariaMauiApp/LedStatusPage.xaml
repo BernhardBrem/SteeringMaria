@@ -5,7 +5,7 @@
 			 
     <ScrollView>
     <VerticalStackLayout >
-    <Label Text="All"/>
+    <Label Text="All:" FontAttributes = "Bold" />
     <Grid x:Name="AllLedStatus">
        <Grid.RowDefinitions>
           <RowDefinition />
@@ -18,9 +18,9 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Text="On"/>
         <Label Grid.Row="1" Grid.Column="0" Text="Off"/>
-        <Label Grid.Row="2" Grid.Column="0" Text="LEDs:"/>
-        <CheckBox x:Name="AllLedOn" Grid.Row="0" Grid.Column="1" IsChecked="False"  ></CheckBox>
-        <CheckBox x:Name="AllLedOff" Grid.Row="1" Grid.Column="1" IsChecked="False"  ></CheckBox>
+        <Label Grid.Row="2" Grid.Column="0" Text="LEDs:" FontAttributes = "Bold" />
+        <CheckBox x:Name="AllLedOn" Grid.Row="0" Grid.Column="1" IsChecked="False" CheckedChanged = "OnAllOnChanged" ></CheckBox> 
+        <CheckBox x:Name="AllLedOff" Grid.Row="1" Grid.Column="1" IsChecked="False" CheckedChanged = "OnAllOffChanged" ></CheckBox>
         
     </Grid>
     </VerticalStackLayout>
