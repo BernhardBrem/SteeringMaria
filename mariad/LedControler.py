@@ -81,8 +81,8 @@ class LedControlerManager:
     
     def putStatus(self,status):
         for l in status:
-            if l["name"] in self.LedControlers:
-                self.LedControlers["name"].on=status["On"]
+            if l["Name"] in self.LedControlers:
+                self.LedControlers[l["Name"]].on=l["On"]
 
 
     def start(self):
