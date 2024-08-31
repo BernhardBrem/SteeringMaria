@@ -37,3 +37,9 @@ def LedStatus():
       result.append(ledManager.getStatus(l))
    return respond(result)
 
+@app.route("/LED/Settings", methods=['GET', 'POST','PUT'])
+def LedSettings():
+   print(f"YYYY{request}")
+   result=ledManager.getSettings()
+   return respond(result)
+ 

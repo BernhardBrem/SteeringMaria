@@ -51,15 +51,16 @@ class LedControlerManager:
         self.lock=Lock()
         self.run=True
         self.pwm=pwm
-
-    def addControler(self,name):
-        prefs={
+        self.prefs={
           "channel": -1,
           "brightnes": 2500,
           "brightnesspan":10,
-         "brightnesfactor": 0.7
+          "brightnesfactor": 0.7
         }
-        settings=SettingsManager.getSettings("/LED"+name,prefs)
+
+    def addControler(self,name):
+        
+        settings=SettingsManager.getSettings("/LED/"+name,self.prefs)
         self.LedControlers[name]=LedControler(self.pwm,settings)
 
     def loop(self):
@@ -78,6 +79,12 @@ class LedControlerManager:
     def getStatus(self,name):
         if name in self.LedControlers:
             return {"Name":name, "On":self.LedControlers[name].on}
+
+    def getSettings(self):
+        result={}
+        for name in self.LedControlers:        
+            result[name]=SettingsManager.getSettings("/LED/"+name,self.prefs)
+        return result
     
     def putStatus(self,status):
         for l in status:
