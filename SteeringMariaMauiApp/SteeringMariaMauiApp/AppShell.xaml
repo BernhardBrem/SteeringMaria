@@ -19,10 +19,10 @@
                 ContentTemplate="{DataTemplate local:LedStatusPage}"
                 Route="TwoPage" />
         </Tab>
-        <Tab Title="Three" Icon="{StaticResource IconThree}">
+        <Tab Title="Led Settings" Icon="{StaticResource IconThree}">
             <ShellContent
-                Title="Three"
-                ContentTemplate="{DataTemplate local:MainPage}"
+                Title="LED Settings"
+                ContentTemplate="{DataTemplate local:LedSettingsPage}"
                 Route="ThreePage" />
         </Tab>
         <Tab Title="Four" Icon="{StaticResource IconFour}">

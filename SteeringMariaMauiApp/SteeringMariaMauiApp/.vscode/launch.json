@@ -2,11 +2,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C#: SteeringMariaMauiApp",
-            "type": "dotnet",
+            
+
+            "name": ".NET MAUI",
+            "type": "maui",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/SteeringMariaMauiApp.csproj",
-            "launchConfigurationId": "vscode-maui"
+            "preLaunchTask": "maui: Build"
         }
     ],
     "logging": {
