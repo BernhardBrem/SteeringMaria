@@ -7,19 +7,19 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <Tab Title="Bl" Icon="{StaticResource IconOne}">
+        <Tab Title="Settings" Icon="settings.jpg">
             <ShellContent
                 Title="Base Settings"
                 ContentTemplate="{DataTemplate local:BaseSettingPage}"
                 Route="OnePage" /> 
         </Tab>
-        <Tab Title="Led Status" Icon="{StaticResource IconTwo}">
+        <Tab Title="Led Status" Icon="lamp1.png">
             <ShellContent
                 Title="LED Status"
                 ContentTemplate="{DataTemplate local:LedStatusPage}"
                 Route="TwoPage" />
         </Tab>
-        <Tab Title="Led Settings" Icon="{StaticResource IconThree}">
+        <Tab Title="Led Settings" Icon="lamp2.png">
             <ShellContent
                 Title="LED Settings"
                 ContentTemplate="{DataTemplate local:LedSettingsPage}"
