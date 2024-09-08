@@ -4,7 +4,7 @@
              x:Class="SteeringMariaMaui.LedStatusPage">
 			 
     <ScrollView>
-    <VerticalStackLayout >
+    <VerticalStackLayout Margin="20">
     <Label Text="All:" FontAttributes = "Bold" />
     <Grid x:Name="AllLedStatus">
        <Grid.RowDefinitions>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SteeringMariaMaui.LedSettingsPage">
+			 
+   <ScrollView>
+   <VerticalStackLayout Margin="20" >
+   <Label Text="LED:" FontAttributes = "Bold" />
+   <Border>
+   <Picker x:Name="SourceSelector" SelectedIndexChanged="OnLedChanged"  Title="Light:" >
+        <Picker.Items/>
+   </Picker>
+   </Border>
+    <Grid x:Name="AllLedStatus">
+       <Grid.RowDefinitions>
+          <RowDefinition />
+          <RowDefinition />
+          <RowDefinition />
+          <RowDefinition />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+       <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Text="Channel (-1 zo 15)"/>
+        <Entry x:Name="Channel" Placeholder="-1" TextChanged="OnChannelTextChanged" Completed="OnChannelCompleted" Grid.Row="0" Grid.Column="1"  />
+        <Label Grid.Row="1" Grid.Column="0" Text="Brightnes"/>
+        <Slider x:Name="Brightnes" Maximum="4095" ValueChanged="OnBrightnesSliderValueChanged" Grid.Row="1" Grid.Column="1"/>
+        <Label  Grid.Row="2" Grid.Column="0" Text="BrightnesSpan"/>  
+        <Slider x:Name="BrightnesSpan" Maximum="1000" ValueChanged="OnBrightnesSpanSliderValueChanged" Grid.Row="2" Grid.Column="1"/>
+        <Label Grid.Row="3" Grid.Column="0" Text="BrightnesFactor"/>  
+        <Slider x:Name="BrightnesFactor" Maximum="1" ValueChanged="OnBrightnesFactorSliderValueChanged" Grid.Row="3" Grid.Column="1"/>
+        
+    </Grid>
+    </VerticalStackLayout>
+    
+    </ScrollView>
+ 
+</ContentPage>
