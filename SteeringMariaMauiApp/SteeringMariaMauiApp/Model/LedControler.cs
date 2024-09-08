@@ -55,9 +55,27 @@ public class LedControler:IDataModel{
 		var client = DataModel.GetHttpClient();
 
         Trace.WriteLine("Sending "+status.Count.ToString()+" events");
+		try{
 		HttpResponseMessage result = await client.PutAsJsonAsync<List<LedStatus>>("/LED/Status",status);
-		
+		} catch {
+			Trace.WriteLine("Warning: Com error in PutLedStatus");
+		}
 	}
+
+	public void UpdateStatus(string ledName,LedSettings settings){
+		PutLedStaticSettings(ledName,settings);
+	}
+
+	private static async void PutLedStaticSettings(string ledName, LedSettings settings){
+		var client = DataModel.GetHttpClient();
+		try {
+            HttpResponseMessage result = await client.PutAsJsonAsync<LedSettings>("/LED/Settings/"+ledName,settings);
+		} catch {
+			Trace.WriteLine("Warning: Com error in PutLedSettings");
+		}
+	}
+
+
 
 
 

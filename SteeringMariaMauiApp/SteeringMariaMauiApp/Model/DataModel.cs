@@ -43,8 +43,13 @@ public  static class DataModel
 	}
 
 	public static async Task<HttpResponseMessage> GetResponseAsync(string path){
-	 	Trace.WriteLine("Querying path");
-		HttpResponseMessage response = await client.GetAsync(path);
+	 	HttpResponseMessage response=null;
+		Trace.WriteLine("Querying path");
+		try{
+		   response = await client.GetAsync(path);
+		} catch {
+			Trace.WriteLine("Don't get response for " + path);
+		}
 		Trace.WriteLine("Got response");
 		return response;
 	}
