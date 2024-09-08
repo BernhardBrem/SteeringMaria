@@ -24,7 +24,7 @@
           <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Text="Channel (-1 zo 15)"/>
-        <Entry x:Name="Channel" Placeholder="-1" TextChanged="OnChannelTextChanged" Completed="OnChannelCompleted" Grid.Row="0" Grid.Column="1"  />
+        <Entry x:Name="Channel" Placeholder="-1" Completed="OnChannelCompleted" Grid.Row="0" Grid.Column="1"  />
         <Label Grid.Row="1" Grid.Column="0" Text="Brightnes"/>
         <Slider x:Name="Brightnes" Maximum="4095" ValueChanged="OnBrightnesSliderValueChanged" Grid.Row="1" Grid.Column="1"/>
         <Label  Grid.Row="2" Grid.Column="0" Text="BrightnesSpan"/>  

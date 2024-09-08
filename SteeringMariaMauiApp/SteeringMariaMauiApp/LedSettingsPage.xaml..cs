@@ -17,7 +17,7 @@ public partial class LedSettingsPage : ContentPage
 	
 	}
 
-	void setSurfaceToLed(){
+	void SetSurfaceToLed(){
 		var settings=LedSettings[ledName];
 		Channel.Text=settings.channel.ToString();
 	    Brightnes.Value=settings.brightnes;
@@ -32,19 +32,38 @@ public partial class LedSettingsPage : ContentPage
   		if (selectedIndex != -1)
   		{
     		ledName = (string)picker.Items[selectedIndex];
-			setSurfaceToLed();
+			SetSurfaceToLed();
   		}
 	}
     
-	void OnChannelTextChanged(object sender,  TextChangedEventArgs e){}
-
-	void OnChannelCompleted (object sender,  EventArgs e) {}
-
-	void OnBrightnesSliderValueChanged(object sender,  ValueChangedEventArgs e) {}
-
-	void OnBrightnesSpanSliderValueChanged(object sender,  ValueChangedEventArgs e) {}
 	
-	void OnBrightnesFactorSliderValueChanged(object sender,  ValueChangedEventArgs e) {}
+
+	void OnChannelCompleted (object sender,  EventArgs e) {
+        var isNr = int.TryParse(Channel.Text, out int channelNr);
+		if (isNr){
+			LedSettings[ledName].channel=channelNr;
+            ledControler.UpdateStatus(ledName,LedSettings[ledName]);
+		}
+		else{
+			Channel.Text=LedSettings[ledName].channel.ToString();
+		}
+    }
+
+	void OnBrightnesSliderValueChanged(object sender,  ValueChangedEventArgs e) {
+		LedSettings[ledName].brightnes=(int)Brightnes.Value;
+		ledControler.UpdateStatus(ledName,LedSettings[ledName]);
+
+	}
+
+	void OnBrightnesSpanSliderValueChanged(object sender,  ValueChangedEventArgs e) {
+		LedSettings[ledName].brightnesspan=(int)BrightnesSpan.Value;
+		ledControler.UpdateStatus(ledName,LedSettings[ledName]);
+	}
+	
+	void OnBrightnesFactorSliderValueChanged(object sender,  ValueChangedEventArgs e) {
+		LedSettings[ledName].brightnesfactor=BrightnesFactor.Value;
+		ledControler.UpdateStatus(ledName,LedSettings[ledName]);
+	}
     
 	
 
