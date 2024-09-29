@@ -1,20 +1,23 @@
 import flask 
 import json
-import PCA9685 
+
 import LedControler
+from LedControler import LedControlerManager
+from PWMManager import PwmManager
+from SettingsManager import SettingsManager
 import serial
 from flask import request
 app = flask.Flask(__name__)
 # Servo board
-PWM = PCA9685.PCA9685(0x40, debug=False)
-PWM.setPWMFreq(50)
+
 
 ledNames=["Steuerboard","Backboard","Mast"]
+PwmManager.start()
+SettingsManager.start()
+LedControlerManager.start()
 
-ledManager=LedControler.LedControlerManager(PWM)
 for name in ledNames:
-   ledManager.addControler(name)
-ledManager.start()
+   LedControlerManager.addControler(name)
 
 def respond(o):
    resp=flask.Response(json.dumps(o))
@@ -31,21 +34,23 @@ def LedStatus():
    if request.method == 'POST'or request.method == 'PUT':
       allLedStatus=request.get_json()
       print(allLedStatus)
-      ledManager.putStatus(allLedStatus)
+      LedControlerManager.putStatus(allLedStatus)
    result=[]
    for l in ledNames:
-      result.append(ledManager.getStatus(l))
+      result.append(LedControlerManager.getStatus(l))
    return respond(result)
 
 @app.route("/LED/Settings", methods=['GET','PUT','POST'])
 def LedSettings():
    print(f"YYYY{request}")
-   result=ledManager.getSettings()
+   result=LedControlerManager.getSettings()
    return respond(result)
  
 @app.route("/LED/Settings/<name>", methods=['PUT','POST'])
 def PutLedSettings(name):
-   print(f"YYYY{request}")
-   ledManager.putSetting(name,request.get_json())
+   tjson=request.get_json()
+   print(f"{request} {tjson}")
+   LedControlerManager.putSetting(name,tjson)
+   return respond(True)
    #result=ledManager.getSettings()
    #return respond(result)

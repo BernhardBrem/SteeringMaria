@@ -1,0 +1,1 @@
+{"/LED/Steuerboard": {"channel": 0, "brightnes": 1747, "brightnesspan": 58.0, "brightnesfactor": 0.9478908185604451, "flickrspan": 50.0}, "/LED/Backboard": {"channel": 1, "brightnes": 1808, "brightnesspan": 71.0, "brightnesfactor": 1.0, "flickrspan": 223.0}, "/LED/Mast": {"channel": 3, "brightnes": 2500, "brightnesspan": 100.0, "brightnesfactor": 0.7, "flickrspan": 150.0}}

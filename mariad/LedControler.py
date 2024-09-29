@@ -1,13 +1,14 @@
 #!/bin/python3
 from time import sleep, perf_counter, monotonic
-from threading import Thread,Lock
 import SettingsManager
 import random
+import queue
+from PWMManager import PwmManager
+from SettingsManager import SettingsManager 
+from threading import Thread
 
 class LedControler:
-    def __init__(self, pwm, settings):
-        
-        self.pwm=pwm
+    def __init__(self,  settings):
         self.on=False
         self.settings=settings
         self.brightnestime=monotonic()
@@ -15,6 +16,7 @@ class LedControler:
         self.actualBrightnes=2500
         self.brightnesDown=True
         self.flickrplan={}
+        
 
     def changeBrightnes(self):
         if self.settings["brightnesspan"] > 5:
@@ -39,48 +41,62 @@ class LedControler:
     def changeFlickr(self):
         if self.settings["flickrspan"] > 5:
             t=monotonic()
-            if (t > self.flickrtime + self.settings["brightnesspan"]): # Start flickring
+            if (t > self.flickrtime + self.settings["flickrspan"]): # Start flickring
                 if self.flickrplan=={}:
                     # Calculate flickr events with random nrs
-                    nrOfFlicks=random.randint(1,10)
+                    nrOfFlicks=random.randint(1,20)
+                    print(f"Flickring {nrOfFlicks} on chan {self.settings['channel']}")
                     ti=t
+                    bright=False
                     for i in range(1,nrOfFlicks):
-                        ti=ti+random.random()*0.75 # A fraction shorter than 0.75 seconds
-                        tv=random.random()
+                        ti=ti+random.random() # A fraction shorter than 0.75 seconds
+                        if bright:
+                            tv=1-random.random()*0.2
+                            bright=False
+                        else:
+                            tv=random.random()*0.5
+                            bright=True
                         self.flickrplan[ti]=tv
                 # Search the according time in the flickr plan
-                last=False
+                lasttx=0
+                txToSet=0
                 for tx in self.flickrplan:
-                    if t < tx:
-                        self.actualBrightnes=self.actualBrightnes*self.flickrplan[tx]
-                if t >= tx:
+                    if t > lasttx and t <=tx:
+                        txToSet=tx
+                    lasttx=tx
+                if txToSet != 0:
+                    self.actualBrightnes=self.actualBrightnes*self.flickrplan[txToSet]
+                    print(f"t {t} tx {txToSet} b {self.actualBrightnes}")
+                if t >= lasttx:
                     self.flickrplan={}
                     self.flickrtime=t
-                   
-
-
-
-
+                    print("End flickr")
 
     def update(self):
+        #print(self.settings)
         if self.settings["channel"] != -1:
             if self.on:
                 #print("On!")
                 #print("Set brightness to " + str(self.brightness))
                 self.changeBrightnes()
-                self.pwm.setServoPulse(self.settings["channel"],self.actualBrightnes)
+                self.changeFlickr()
+                PwmManager.setPWM(self.settings["channel"],0,int(self.actualBrightnes))
             else:
                 #print("Off!")
-                self.pwm.setServoPulse(self.settings["channel"],0)
+                PwmManager.setPWM(self.settings["channel"],0,0)
 
 
 
 class LedControlerManager:
-    def __init__(self,pwm):
+    inputQueue=queue.Queue()
+    outputStatusQueue=queue.Queue()
+    outputSettingsQueue=queue.Queue()
+    run=True
+
+
+    def __init__(self):
         self.LedControlers={}
-        self.lock=Lock()
         self.run=True
-        self.pwm=pwm
         self.prefs={
           "channel":           -1,
           "brightnes":         2500,
@@ -88,47 +104,89 @@ class LedControlerManager:
           "brightnesfactor":   0.7,
           "flickrspan":        150,
         }
-
-    def addControler(self,name):
         
-        settings=SettingsManager.getSettings("/LED/"+name,self.prefs)
-        self.LedControlers[name]=LedControler(self.pwm,settings)
-
+    
     def loop(self):
         while(self.run):
-            #print("acquire lock")
-            #self.lock.acquire()
-            #print("Got lock")
-            for c in self.LedControlers:
-                #print("Update " + c)
-                self.LedControlers[c].update()
-            #print("Release lock")
-            #self.lock.release()
-            #print("Released")
-            sleep(0.02)
+            command,data=LedControlerManager.inputQueue.get()
+            if command != "update":
+                print("Got command " + command)
+            if command == "getStatus":
+                LedControlerManager.outputStatusQueue.put(self.__getStatus__(data))
+            if command == "getSettings":
+                LedControlerManager.outputSettingsQueue.put(self.__getSettings__())
+            if command == "putStatus":
+                self.__putStatus__(data)
+            if command == "putSettings":
+                name,setting=data
+                self.__putSetting__(name,setting)
+            if command == "addControler":
+                self.__addControler__(data)
+            if command == "update":
+                for c in self.LedControlers:
+                    self.LedControlers[c].update()
+
+    @staticmethod
+    def addControler(name):
+        LedControlerManager.inputQueue.put(["addControler",name])
+
+    def __addControler__(self,name):        
+        settings=SettingsManager.getSettings("/LED/"+name,self.prefs)
+        self.LedControlers[name]=LedControler(settings)
+        
     
-    def getStatus(self,name):
+    @staticmethod
+    def getStatus(name):
+        LedControlerManager.inputQueue.put(["getStatus",name])
+        return LedControlerManager.outputStatusQueue.get()
+
+    def __getStatus__(self,name):
         if name in self.LedControlers:
             return {"Name":name, "On":self.LedControlers[name].on}
 
-    def getSettings(self):
+    @staticmethod
+    def getSettings():
+        LedControlerManager.inputQueue.put(["getSettings",""])
+        print("Requesting settings, putting request in queue")
+        return LedControlerManager.outputSettingsQueue.get()
+
+    def __getSettings__(self):
         result={}
         for name in self.LedControlers:        
             result[name]=SettingsManager.getSettings("/LED/"+name,self.prefs)
         return result
     
-    def putStatus(self,status):
-        for l in status:
-            if l["Name"] in self.LedControlers:
-                self.LedControlers[l["Name"]].on=l["On"]
+    @staticmethod
+    def putStatus(status):
+        LedControlerManager.inputQueue.put(["putStatus",status])
 
-    def putSetting(self,name,setting):
+    def __putStatus__(self,status):
+        for l in status:
+            print("PutStatus")
+            if l["Name"] in self.LedControlers:
+                print(f"{l['Name']} {l['On']}")
+                self.LedControlers[l["Name"]].on=l["On"]
+    
+    @staticmethod
+    def putSetting(name,setting):
+        LedControlerManager.inputQueue.put(["putSettings",[name,setting]])
+
+    def __putSetting__(self,name,setting):
         if name in self.LedControlers:
             self.LedControlers[name].settings=setting
             SettingsManager.setSetting("/LED/"+name,setting)
     
+    @staticmethod
+    def __triggerUpdate__():
+        while(LedControlerManager.run):
+            LedControlerManager.inputQueue.put(["update",""])
+            #sleep(0.02)
+            sleep(2)
 
-
-    def start(self):
-       t = Thread(target=self.loop)#, args=(self,))
-       t.start()
+    @staticmethod
+    def start():
+        workthread = Thread(target=LedControlerManager().loop)#, args=(self,))
+        workthread.start()
+        updatethread = Thread(target=LedControlerManager.__triggerUpdate__)#, args=(self,))
+        updatethread.start()
+       
