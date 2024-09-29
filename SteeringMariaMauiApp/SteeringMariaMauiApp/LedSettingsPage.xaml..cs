@@ -39,8 +39,10 @@ public partial class LedSettingsPage : ContentPage
 	
 
 	void OnChannelCompleted (object sender,  EventArgs e) {
+		Trace.WriteLine("OnChannelCompleted called!");
         var isNr = int.TryParse(Channel.Text, out int channelNr);
 		if (isNr){
+			Trace.WriteLine("Got channel nr " + channelNr);
 			LedSettings[ledName].channel=channelNr;
             ledControler.UpdateStatus(ledName,LedSettings[ledName]);
 		}
@@ -55,6 +57,7 @@ public partial class LedSettingsPage : ContentPage
 
 	}
 
+
 	void OnBrightnesSpanSliderValueChanged(object sender,  ValueChangedEventArgs e) {
 		LedSettings[ledName].brightnesspan=(int)BrightnesSpan.Value;
 		ledControler.UpdateStatus(ledName,LedSettings[ledName]);
@@ -65,8 +68,11 @@ public partial class LedSettingsPage : ContentPage
 		ledControler.UpdateStatus(ledName,LedSettings[ledName]);
 	}
     
-	
-
+	void OnFlickrSpanSliderValueChanged(object sender,  ValueChangedEventArgs e){
+		LedSettings[ledName].flickrspan=(int)FlickrSpan.Value;
+		ledControler.UpdateStatus(ledName,LedSettings[ledName]);
+	}
+  
     
 	public void OnSettingsReady(object sender,EventArgs args){
 		Trace.WriteLine("Updating LED Names");

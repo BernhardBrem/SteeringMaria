@@ -13,6 +13,7 @@ public class LedControler:IDataModel{
 	   public int brightnes {get; set;}
 	   public double brightnesspan {get; set;}
 	   public double brightnesfactor {get; set;}
+	   public double flickrspan {get; set;}
 
 
     }
@@ -67,6 +68,7 @@ public class LedControler:IDataModel{
 	}
 
 	private static async void PutLedStaticSettings(string ledName, LedSettings settings){
+		Trace.WriteLine("Sending settings for " + ledName + " on channel " + settings.channel.ToString());
 		var client = DataModel.GetHttpClient();
 		try {
             HttpResponseMessage result = await client.PutAsJsonAsync<LedSettings>("/LED/Settings/"+ledName,settings);

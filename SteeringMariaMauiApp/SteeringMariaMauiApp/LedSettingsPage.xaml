@@ -28,9 +28,11 @@
         <Label Grid.Row="1" Grid.Column="0" Text="Brightnes"/>
         <Slider x:Name="Brightnes" Maximum="4095" ValueChanged="OnBrightnesSliderValueChanged" Grid.Row="1" Grid.Column="1"/>
         <Label  Grid.Row="2" Grid.Column="0" Text="BrightnesSpan"/>  
-        <Slider x:Name="BrightnesSpan" Maximum="1000" ValueChanged="OnBrightnesSpanSliderValueChanged" Grid.Row="2" Grid.Column="1"/>
+        <Slider x:Name="BrightnesSpan" Maximum="600" ValueChanged="OnBrightnesSpanSliderValueChanged" Grid.Row="2" Grid.Column="1"/>
         <Label Grid.Row="3" Grid.Column="0" Text="BrightnesFactor"/>  
         <Slider x:Name="BrightnesFactor" Maximum="1" ValueChanged="OnBrightnesFactorSliderValueChanged" Grid.Row="3" Grid.Column="1"/>
+        <Label  Grid.Row="4" Grid.Column="0" Text="FlickrSpan"/>  
+        <Slider x:Name="FlickrSpan" Maximum="600" ValueChanged="OnFlickrSpanSliderValueChanged" Grid.Row="4" Grid.Column="1"/>
         
     </Grid>
     </VerticalStackLayout>
