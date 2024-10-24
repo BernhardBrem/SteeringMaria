@@ -58,24 +58,20 @@ public partial class LedStatusPage : ContentPage
 	bool blockBoxChecked = false;
 	void OnCheckedChanged(object sender, CheckedChangedEventArgs e)
 	{
-		Trace.WriteLine("Got event");
 		if (! blockBoxChecked){
-			Trace.WriteLine("Not blocked");
 			blockBoxChecked=true;
-			List<LedControler.LedStatus> controler=new List<LedControler.LedStatus>();
+			List<LedControler.LedStatus> statusList=new List<LedControler.LedStatus>();
 			foreach(KeyValuePair<string, CheckBox> entry in gridpositions){
 				var status = new LedControler.LedStatus
 				{
 					Name = entry.Key,
 					On = entry.Value.IsChecked
 				};
-				controler.Add(status);
+				statusList.Add(status);
 			    Trace.WriteLine(entry.Key + " " +entry.Value.IsChecked.ToString());	
 			}
-			Trace.WriteLine("SetCommon");
 			SetCommonCheckboxes();
-			ledControler.PutLedStatus(controler);
-			Trace.WriteLine("Unblock");
+			ledControler.PutLedStatus(statusList);
 			blockBoxChecked=false;
 		}
 	
