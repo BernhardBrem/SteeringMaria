@@ -11,7 +11,7 @@ app = flask.Flask(__name__)
 # Servo board
 
 
-ledNames=["Steuerboard","Backboard","Mast"]
+ledNames=["Steuerboard","Backboard","Mast","Kabine"]
 PwmManager.start()
 SettingsManager.start()
 LedControlerManager.start()

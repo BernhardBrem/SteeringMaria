@@ -44,12 +44,12 @@ class LedControler:
             if (t > self.flickrtime + self.settings["flickrspan"]): # Start flickring
                 if self.flickrplan=={}:
                     # Calculate flickr events with random nrs
-                    nrOfFlicks=random.randint(1,20)
+                    nrOfFlicks=random.randint(1,40)
                     print(f"Flickring {nrOfFlicks} on chan {self.settings['channel']}")
                     ti=t
                     bright=False
                     for i in range(1,nrOfFlicks):
-                        ti=ti+random.random() # A fraction shorter than 0.75 seconds
+                        ti=ti+random.random()*0.5 # A fraction shorter than 1 seconds
                         if bright:
                             tv=1-random.random()*0.2
                             bright=False
@@ -180,8 +180,8 @@ class LedControlerManager:
     def __triggerUpdate__():
         while(LedControlerManager.run):
             LedControlerManager.inputQueue.put(["update",""])
-            #sleep(0.02)
-            sleep(2)
+            sleep(0.05)
+            #sleep(2)
 
     @staticmethod
     def start():
