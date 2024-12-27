@@ -1,23 +1,22 @@
 import flask 
 import json
-
-import LedControler
-from LedControler import LedControlerManager
-from PWMManager import PwmManager
-from SettingsManager import SettingsManager
 import serial
+import Maria
+from LedControler import LedControlerManager
+
+##########################################################################
+# Since we have a flask application, this is the entry class 
+# of the application which runs the flask mainloop and responds to the web.
+#
+# The loops of all other functionality is started in the Maria module
+###########################################################################
+
+Maria.wireUp()
+
 from flask import request
 app = flask.Flask(__name__)
 # Servo board
 
-
-ledNames=["Steuerboard","Backboard","Mast","Kabine"]
-PwmManager.start()
-SettingsManager.start()
-LedControlerManager.start()
-
-for name in ledNames:
-   LedControlerManager.addControler(name)
 
 def respond(o):
    resp=flask.Response(json.dumps(o))
@@ -52,5 +51,3 @@ def PutLedSettings(name):
    print(f"{request} {tjson}")
    LedControlerManager.putSetting(name,tjson)
    return respond(True)
-   #result=ledManager.getSettings()
-   #return respond(result)
