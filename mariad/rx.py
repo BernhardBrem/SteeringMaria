@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 """
-Taken from https://github.com/fifteenhex/python-sbus
 Based on:
 	Sokrates80/sbus_driver_micropython git hub
 	https://os.mbed.com/users/Digixx/code/SBUS-Library_16channel/file/83e415034198/FutabaSBUS/FutabaSBUS.cpp/
@@ -20,7 +19,8 @@ class SBUSReceiver:
 
         START_BYTE = 0x0f
         END_BYTE = 0x00
-        SBUS_FRAME_LEN = 2
+        SBUS_FRAME_LEN = 25
+
         def __init__(self):
             super().__init__()
             self._in_frame = False
@@ -57,7 +57,6 @@ class SBUSReceiver:
         SBUS_SIGNAL_FAILSAFE = 2
 
         def __init__(self, frame):
-            print(frame)
             self.sbusChannels = [None] * SBUSReceiver.SBUSFrame.SBUS_NUM_CHANNELS
 
             channel_sum = int.from_bytes(frame[1:23], byteorder="little")
@@ -117,14 +116,14 @@ class SBUSReceiver:
         self._protocol = None
 
     @staticmethod
-    async def create(port='/dev/ttyUSB0'):
+    async def create(port='/dev/ttySerial0'):
         receiver = SBUSReceiver()
         receiver._transport, receiver._protocol = await serial_asyncio.create_serial_connection(
             asyncio.get_running_loop(),
             SBUSReceiver.SBUSFramer,
             port,
             baudrate=100000,
-            parity=serial.PARITY_NONE,
+            parity=serial.PARITY_EVEN,
             stopbits=serial.STOPBITS_TWO,
             bytesize=serial.EIGHTBITS)
         return receiver
@@ -139,7 +138,7 @@ async def main():
     while True:
         frame = await sbus.get_frame()
         channels=frame.get_rx_channels()
-        print(f"{channels[0]} {channels[1]} {channels[5]}")
+        print(f"{channels[0]} {channels[1]} {channels[2]} {channels[9]} {channels[10]} {channels[7]} {frame.failSafeStatus} ")
         #for i in range (0, len(channels)):
         #    if (i < len(lastchannels)) and (lastchannels[i] != channels[i]):
         #        print(f"{i}: {lastchannels[i]}   {channels[i]}")
