@@ -77,6 +77,10 @@ public partial class LedStatusPage : ContentPage
 	
 	}
 
+	void OnRefreshClicked(object sender, EventArgs e){
+		ledControler.RequestLedStatus();
+	}
+
 	private void UpdateGrid(LedControler.LedStatus status){
 		if (! gridpositions.ContainsKey(status.Name)){
 			AllLedStatus.AddRowDefinition(new RowDefinition());

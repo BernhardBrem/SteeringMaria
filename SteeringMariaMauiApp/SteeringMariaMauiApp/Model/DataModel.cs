@@ -47,10 +47,12 @@ public  static class DataModel
 		Trace.WriteLine("Querying path");
 		try{
 		   response = await client.GetAsync(path);
-		} catch {
+		   Trace.WriteLine("Got response");
+		} catch(Exception e) {
 			Trace.WriteLine("Don't get response for " + path);
+			Trace.WriteLine(e.ToString());
 		}
-		Trace.WriteLine("Got response");
+		
 		return response;
 	}
 

@@ -23,6 +23,15 @@
         <CheckBox x:Name="AllLedOff" Grid.Row="1" Grid.Column="1" IsChecked="False" CheckedChanged = "OnAllOffChanged" ></CheckBox>
         
     </Grid>
+    <Grid>
+      <Grid.RowDefinitions>
+          <RowDefinition />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <ImageButton Source="refresh.png" Grid.Row="0" Grid.Column="0" Clicked="OnRefreshClicked" HorizontalOptions="Center" VerticalOptions="Center" />
+    </Grid>
     </VerticalStackLayout>
     
     </ScrollView>
