@@ -11,7 +11,6 @@ from LedControler import LedControlerManager
 # The loops of all other functionality is started in the Maria module
 ###########################################################################
 
-Maria.wireUp()
 
 from flask import request
 app = flask.Flask(__name__)
@@ -51,3 +50,5 @@ def PutLedSettings(name):
    print(f"{request} {tjson}")
    LedControlerManager.putSetting(name,tjson)
    return respond(True)
+
+Maria.wireUp()
