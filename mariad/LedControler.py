@@ -66,7 +66,7 @@ class LedControler:
                     lasttx=tx
                 if txToSet != 0:
                     self.actualBrightnes=self.actualBrightnes*self.flickrplan[txToSet]
-                    print(f"t {t} tx {txToSet} b {self.actualBrightnes}")
+                    #print(f"t {t} tx {txToSet} b {self.actualBrightnes}")
                 if t >= lasttx:
                     self.flickrplan={}
                     self.flickrtime=t

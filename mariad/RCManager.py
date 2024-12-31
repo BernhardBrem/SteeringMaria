@@ -1,31 +1,66 @@
-import rx
-import asyncio
+import sbus_serial
+from threading import Thread
+import queue
+import time
 
-__lastchannels__=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-__channelMap__=[]
+class RCManager():
+    
+    inputQueue=queue.Queue()
 
-async def __main__(channelMap):
-    global __lastchannels__
-    sbus = await rx.SBUSReceiver.create("/dev/serial0")
-    #sbus = await rx.SBUSReceiver.create("/dev/ttyAMA0")
-    while True:
-        frame = await sbus.get_frame()
-        if frame.failSafeStatus == 0:
+    def __init__(self):
+        self.__lastchannels__=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        self.__channelMap__=[]
+        self.__stop__=False
+        self.sbus=sbus_serial.SBUSReceiver.create("/dev/serial0")
+
+    def handle_sbus(self):
+        self.sbus.read_data()
+        frame = self.sbus.get_frame()
+        #print("Have frame")
+        if frame != None and frame.failSafeStatus == 0:
             channels=frame.get_rx_channels()
             #print(channels)
             for i in range(0,len(channels)):
-                if (channels[i] != __lastchannels__[i]):
-                    for [channel, value, command ] in channelMap:
+                if (channels[i] != self.__lastchannels__[i]):
+                    for [channel, value, command ] in self.__channelMap__:
                         if channel == i:
                             if channels[i] == value:
+                                print("!!!!!")
+                                print(command)
                                 command()
-            __lastchannels__=channels
-                    
+            self.__lastchannels__=channels
+        
+    def loop(self):
+        while not self.__stop__:
+            self.handle_sbus()
+            try:
+                command=RCManager.inputQueue.get(False)
+            except: 
+                command=None
+            # Handle commands if any
+            if command != None:
+                commandType=command[0]
+                if commandType=="stop":
+                    self.__stop__ = True
+                if commandType=="addToChannelMap":
+                    [commandType,channel,value,command]=command
+                    self.__addToChannelMap__(channel,value,command)
+            time.sleep(0.01)         
 
         #print(f"{channels[0]} {channels[1]} {channels[5]}")
 
-def addToChannelMap(channel,value,command):
-    __channelMap__.append([channel,value,command])
+    def __addToChannelMap__(self,channel,value,command):
+        self.__channelMap__.append([channel,value,command])
 
-def start():
-    asyncio.run(__main__(__channelMap__))
+    @staticmethod
+    def addToChannelMap(channel,value,command):
+        RCManager.inputQueue.put(["addToChannelMap",channel,value,command])
+
+    @staticmethod
+    def start():
+        workthread = Thread(target=RCManager().loop)
+        workthread.start()
+
+    @staticmethod
+    def stop():
+        RCManager.inputQueue.put(["stop"])

@@ -1,5 +1,5 @@
 import LedControler
-import RCManager
+from RCManager import RCManager
 from LedControler import LedControlerManager
 from PWMManager import PwmManager
 from SettingsManager import SettingsManager
@@ -18,6 +18,8 @@ LIGHT1ON1=992
 LIGHT1ON2=1811
 LIGHT2OFF=172
 LIGHT2ON=1811
+LEDNAMES=["Steuerboard","Backboard","Mastlicht","Kompass","Unterdeck"]
+
 
 def switch_off_position_and_ship_lights():
     status=[
@@ -102,19 +104,24 @@ def switch_off_top_light():
 
 
 def wireUp():
-    ledNames=["Steuerboard","Backboard","Mastlicht","Kompass","Unterdeck"]
+    global LEDNAMES
+    print("Starting pammanager")
     PwmManager.start()
+    print("Starting settingsmanager")
     SettingsManager.start()
+    print("Starting LED")
     LedControlerManager.start()
-    for name in ledNames:
+    print("Starting RC")
+    RCManager.start()
+    print("All started, configuring")
+    for name in LEDNAMES:
         LedControlerManager.addControler(name)
     RCManager.addToChannelMap(LIGHT1CHANNEL,LIGHT1OFF,switch_off_position_and_ship_lights)
     RCManager.addToChannelMap(LIGHT1CHANNEL,LIGHT1ON1,switch_on_position_lights)
     RCManager.addToChannelMap(LIGHT1CHANNEL,LIGHT1ON2,switch_on_position_and_ship_lights)
     RCManager.addToChannelMap(LIGHT2CHANNEL,LIGHT2OFF,switch_off_top_light)
     RCManager.addToChannelMap(LIGHT2CHANNEL,LIGHT2ON,switch_on_top_light)
-    RCManager.start()
-
+    
 
 
 

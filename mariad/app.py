@@ -13,6 +13,9 @@ from LedControler import LedControlerManager
 
 
 from flask import request
+print("!!!")
+Maria.wireUp()
+print("!!!")
 app = flask.Flask(__name__)
 # Servo board
 
@@ -34,6 +37,7 @@ def LedStatus():
       print(allLedStatus)
       LedControlerManager.putStatus(allLedStatus)
    result=[]
+   ledNames=Maria.LEDNAMES
    for l in ledNames:
       result.append(LedControlerManager.getStatus(l))
    return respond(result)
@@ -51,4 +55,6 @@ def PutLedSettings(name):
    LedControlerManager.putSetting(name,tjson)
    return respond(True)
 
-Maria.wireUp()
+if __name__ == '__main__':
+    app.run(threaded=False,host="0.0.0.0")
+
