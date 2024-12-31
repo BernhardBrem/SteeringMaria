@@ -3,6 +3,9 @@ from RCManager import RCManager
 from LedControler import LedControlerManager
 from PWMManager import PwmManager
 from SettingsManager import SettingsManager
+import time
+
+
 
 # Idea behind that class: To keep as far as possible the other classes generical. Wire up the different 
 # modules in this one class
@@ -123,5 +126,16 @@ def wireUp():
     RCManager.addToChannelMap(LIGHT2CHANNEL,LIGHT2ON,switch_on_top_light)
     
 
+def tearDown():
+  RCManager.stop()
+  LedControlerManager.stop()
+  SettingsManager.stop()
+  PwmManager.stop()
 
-
+def stop(sig, frame):
+    print("Tearing down")
+    tearDown()
+    #print("Sleeping to allow tear down")
+    #time.sleep(10)
+    print("Exit")
+    exit()

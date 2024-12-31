@@ -3,11 +3,12 @@ import os
 from threading import Thread
 import queue
 
-
+workthread=None
 class SettingsManager:
     inputQueue=queue.Queue()
     filepath="./settings.json"
     getSettingsQueue=queue.Queue()
+
    
 
     def __init__(self):
@@ -57,9 +58,18 @@ class SettingsManager:
             if command == "setSetting":
                 path,settings=data
                 self.__setSetting__(path,settings)
+            if command == "stop":
+                self.run=False
+        print("Stopped session manager")
 
     @staticmethod
     def start():
+        global workthread
         workthread = Thread(target=SettingsManager().loop)#, args=(self,))
         workthread.start()
     
+    @staticmethod
+    def stop():
+        SettingsManager.inputQueue.put(["stop",""])
+        global workthread
+        workthread.join()

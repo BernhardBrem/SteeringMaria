@@ -6,6 +6,7 @@ from threading import Thread
 PWM = PCA9685.PCA9685(0x40, debug=False)
 PWM.setPWMFreq(50)
 
+workthread=None
 class PwmManager:
     inputQueue=queue.Queue()
     
@@ -38,10 +39,18 @@ class PwmManager:
             if command == "setServoPulse":
                 channel,pulse=data
                 self.__setServoPulse__(channel,pulse)
+            if command == "stop":
+                self.run=False
+        print("Stop Mainloop PWMManager")
     
     @staticmethod
     def start():
+        global workthread
         workthread = Thread(target=PwmManager().loop)#, args=(self,))
         workthread.start()
     
-
+    @staticmethod
+    def stop():
+        PwmManager.inputQueue.put(["stop",""])
+        global workthread
+        workthread.join()

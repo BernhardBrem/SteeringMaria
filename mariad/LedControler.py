@@ -7,6 +7,9 @@ from PWMManager import PwmManager
 from SettingsManager import SettingsManager 
 from threading import Thread
 
+workthread=None
+updatethread=None
+
 class LedControler:
     def __init__(self,  settings):
         self.on=False
@@ -91,12 +94,13 @@ class LedControlerManager:
     inputQueue=queue.Queue()
     outputStatusQueue=queue.Queue()
     outputSettingsQueue=queue.Queue()
-    run=True
+    updateQueue=queue.Queue()
 
 
     def __init__(self):
         self.LedControlers={}
         self.run=True
+        self.update=True
         self.prefs={
           "channel":           -1,
           "brightnes":         2500,
@@ -125,6 +129,10 @@ class LedControlerManager:
             if command == "update":
                 for c in self.LedControlers:
                     self.LedControlers[c].update()
+            if command == "stop":
+                print("Stopping LEDManager Mainloop")
+                self.run=False
+        print("Stop mainloop LEDManager")
 
     @staticmethod
     def addControler(name):
@@ -176,17 +184,36 @@ class LedControlerManager:
             self.LedControlers[name].settings=setting
             SettingsManager.setSetting("/LED/"+name,setting)
     
-    @staticmethod
-    def __triggerUpdate__():
-        while(LedControlerManager.run):
+    def triggerUpdate(self):
+        while(self.update):
+            try:
+                command=LedControlerManager.updateQueue.get(False)
+                if (command=="stop"):
+                    self.update=False
+            except:
+                pass
             LedControlerManager.inputQueue.put(["update",""])
             sleep(0.05)
             #sleep(2)
+        print("Stop update ledmanager")
 
     @staticmethod
     def start():
+        global workthread
+        global updatethread
         workthread = Thread(target=LedControlerManager().loop)#, args=(self,))
         workthread.start()
-        updatethread = Thread(target=LedControlerManager.__triggerUpdate__)#, args=(self,))
+        updatethread = Thread(target=LedControlerManager().triggerUpdate)#, args=(self,))
         updatethread.start()
-       
+    
+    @staticmethod
+    def stop():
+        LedControlerManager.inputQueue.put(["stop",""])
+        LedControlerManager.updateQueue.put("stop")
+        global workthread
+        global updatethread
+        workthread.join()
+        print("Stopped ledmanager work thread")
+        updatethread.join()
+        print("Stopped ledmanager update thread")
+        

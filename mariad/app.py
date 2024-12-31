@@ -2,6 +2,7 @@ import flask
 import json
 import serial
 import Maria
+import signal
 from LedControler import LedControlerManager
 
 ##########################################################################
@@ -13,9 +14,11 @@ from LedControler import LedControlerManager
 
 
 from flask import request
-print("!!!")
 Maria.wireUp()
-print("!!!")
+# We handle the signals ourself to stop the working threads
+signal.signal(signal.SIGINT, Maria.stop)
+signal.signal(signal.SIGTERM, Maria.stop)
+
 app = flask.Flask(__name__)
 # Servo board
 
@@ -57,4 +60,5 @@ def PutLedSettings(name):
 
 if __name__ == '__main__':
     app.run(threaded=False,host="0.0.0.0")
+   
 

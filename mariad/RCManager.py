@@ -20,11 +20,12 @@ class RCManager():
         if frame != None and frame.failSafeStatus == 0:
             channels=frame.get_rx_channels()
             #print(channels)
-            for i in range(0,len(channels)):
-                if (channels[i] != self.__lastchannels__[i]):
-                    for [channel, value, command ] in self.__channelMap__:
-                        if channel == i:
+            for [channel, value, command ] in self.__channelMap__:
+                for i in range(0,len(channels)):
+                    if channel == i:
+                        if (channels[i] != self.__lastchannels__[i]):
                             if channels[i] == value:
+                                print(f"XXX{channels[i]} {self.__lastchannels__[i]}XXX")
                                 print("!!!!!")
                                 print(command)
                                 command()
@@ -45,7 +46,8 @@ class RCManager():
                 if commandType=="addToChannelMap":
                     [commandType,channel,value,command]=command
                     self.__addToChannelMap__(channel,value,command)
-            time.sleep(0.01)         
+            time.sleep(0.01)
+        print("Stop RCManager")       
 
         #print(f"{channels[0]} {channels[1]} {channels[5]}")
 
@@ -58,9 +60,13 @@ class RCManager():
 
     @staticmethod
     def start():
+        global workthread
         workthread = Thread(target=RCManager().loop)
         workthread.start()
 
     @staticmethod
     def stop():
         RCManager.inputQueue.put(["stop"])
+        global workthread
+        workthread.join()
+        print("RCManager stopped")
