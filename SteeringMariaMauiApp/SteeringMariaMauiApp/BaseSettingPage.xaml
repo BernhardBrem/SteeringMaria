@@ -29,7 +29,38 @@
               TextChanged="OnEntryTextChanged"
               Completed="OnEntryCompleted" />
             </HorizontalStackLayout>
-
+            <HorizontalStackLayout
+            Spacing="25" 
+            Padding="30,0" 
+            >
+            <Label 
+                Text="Shut down ship computer"
+                HorizontalOptions="Start" />
+            <ImageButton Source="powerbutton.png"  
+                Clicked="OnPowerClicked" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" >
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                           
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale"
+                                Value="0.8" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="PointerOver" >
+                            <VisualState.Setters>
+                            <Setter Property="Scale"
+                                Value="1" />
+                        </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </ImageButton>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
  

@@ -13,6 +13,11 @@ public partial class BaseSettingPage : ContentPage
             DataModel.SetURI(BaseUrl.Text);
 		}
 	}
+	void OnPowerClicked(object sender, EventArgs e){
+		DataModel.RequestShipComputerShutdown();
+		((ImageButton)sender).Scale=1.0;
+	}
+
 
 	private void OnEntryTextChanged(object sender, EventArgs e)
 	{

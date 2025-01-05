@@ -23,6 +23,7 @@ public partial class LedSettingsPage : ContentPage
 	    Brightnes.Value=settings.brightnes;
 	    BrightnesSpan.Value=settings.brightnesspan;
 		BrightnesFactor.Value=settings.brightnesfactor;
+		FlickrSpan.Value=settings.flickrspan;
 	}
 
 	void OnLedChanged(object sender, EventArgs e)

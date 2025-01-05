@@ -60,5 +60,18 @@ public  static class DataModel
 	//	HttpResponseMessage result = await client.PutAsJsonAsync<ttype>(path,(ttype) myObject);
 	//	return result;
 	//}
+	private static async void RequestShipAsyncComputerShutdown(){
+		Trace.WriteLine("Requesting shutdown of the ship computer");
+		var client = DataModel.GetHttpClient();
+		try {
+            HttpResponseMessage result = await client.PutAsync("/ShipComputer/shutdown",new StringContent("shutdown"));
+		} catch {
+			Trace.WriteLine("Warning: Com error in PutLedSettings");
+		}
+	}
+	public static void RequestShipComputerShutdown(){
+	    RequestShipAsyncComputerShutdown();
+	}
+
 
 }

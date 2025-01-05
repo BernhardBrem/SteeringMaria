@@ -84,7 +84,7 @@ public class LedControler:IDataModel{
 	private static async Task<List<LedStatus>> GetLedStatus(){
 		HttpResponseMessage response = await DataModel.GetResponseAsync("/LED/Status");
 		List<LedStatus> result = new List<LedStatus>();
-    	if (response.IsSuccessStatusCode)
+    	if (response != null && response.IsSuccessStatusCode)
         {
 			Trace.WriteLine("Try to read");
 			Trace.WriteLine("Content: " + response.Content.ToString());
