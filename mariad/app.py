@@ -58,6 +58,14 @@ def PutLedSettings(name):
    LedControlerManager.putSetting(name,tjson)
    return respond(True)
 
+
+@app.route("/ShipComputer/shutdown", methods=['PUT','POST'])
+def ShutdownShipComputer():
+   print("Shutdown in webapp requested")
+   Maria.ShutDownShipComputer()
+   return respond(True)
+
+
 if __name__ == '__main__':
     app.run(threaded=False,host="0.0.0.0")
    

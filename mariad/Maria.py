@@ -4,7 +4,7 @@ from LedControler import LedControlerManager
 from PWMManager import PwmManager
 from SettingsManager import SettingsManager
 import time
-
+import os
 
 
 # Idea behind that class: To keep as far as possible the other classes generical. Wire up the different 
@@ -139,3 +139,8 @@ def stop(sig, frame):
     #time.sleep(10)
     print("Exit")
     exit()
+
+def ShutDownShipComputer():
+  print("ShutdownShipComputer requested")
+  os.system("bash -c 'sleep 10 && shutdown now' &")
+  print("Requested shutdown from os in 10 seconds")
